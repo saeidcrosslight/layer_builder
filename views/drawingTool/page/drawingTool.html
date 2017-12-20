@@ -1,0 +1,163 @@
+<div id = "drawingContainer">
+    <button ng-click="writeMaterialFile()">Add materials</button>
+    <button ng-click="writeGeoFile()">Add Geometry</button>
+    <div class="modal fade" id="canvasModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Container Properties</h4>
+                </div>
+                <div class="modal-body">
+                    <form novalidate class="css-form">
+                        <label>R &#181m: <input class="form-control" type="number" ng-model="addedCanvas.width" required min="0" /></label><br />
+                        <label>Z &#181m: <input class="form-control" type="number" ng-model="addedCanvas.height" required min="0" /></label><br />
+                        <label>material:
+                            <select class="form-control" ng-init="addedCanvas.selectedTestMaterial = materialArr[55]" ng-model="addedCanvas.selectedTestMaterial"
+                                    ng-options="material.name for material in materialArr">
+                            </select>
+
+                            <label ng-show=addedCanvas.selectedTestMaterial.symbol1>{{addedCanvas.selectedTestMaterial.symbol1}}:<input class="form-control" type="number" ng-model="addedCanvas.selectedTestMaterial.symbol1Value" required min="0" max="1"/></label><br/>
+                            <label ng-show=addedCanvas.selectedTestMaterial.symbol2>{{addedCanvas.selectedTestMaterial.symbol2}}:<input class="form-control" type="number" ng-model="addedCanvas.selectedTestMaterial.symbol2Value" required min="0" max="1"/></label><br/>
+                            <label ng-show=addedCanvas.selectedTestMaterial.symbol3>{{addedCanvas.selectedTestMaterial.symbol3}}:<input class="form-control" type="number" ng-model="addedCanvas.selectedTestMaterial.symbol3Value" required min="0" max="1"/></label><br/>
+                        </label>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" ng-click="addCanvas(addedCanvas)" value="Save" class="btn btn-default">Save</button>
+                    <button type="button" ng-click="reset()" value="Reset" class="btn btn-default">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="circleModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Circle Properties</h4>
+                </div>
+                <div class="modal-body">
+                    <form novalidate class="css-form">
+                        <label>radius &#181m: <input class="form-control" type="number" ng-model="circle.radius" required min="0" /></label><br />
+                        <label>top position &#181m: <input class="form-control" type="number" ng-model="circle.top" required min="0" /></label><br />
+                        <label>left position &#181m: <input class="form-control" type="number" ng-model="circle.left" required min="0" /></label><br />
+                        <label>material:
+                            <select class="form-control" ng-model="circle.selectedTestMaterial"
+                                    ng-options="material.name for material in materialArr">
+                                <option value="">Select Material</option>
+                            </select>
+                            <label ng-show=circle.selectedTestMaterial.symbol1>{{circle.selectedTestMaterial.symbol1}}:<input class="form-control" type="number" ng-model="circle.selectedTestMaterial.symbol1Value" required min="0" max="1"/></label><br/>
+                            <label ng-show=circle.selectedTestMaterial.symbol2>{{circle.selectedTestMaterial.symbol2}}:<input class="form-control" type="number" ng-model="circle.selectedTestMaterial.symbol2Value" required min="0" max="1"/></label><br/>
+                            <label ng-show=circle.selectedTestMaterial.symbol3>{{circle.selectedTestMaterial.symbol3}}:<input class="form-control" type="number" ng-model="circle.selectedTestMaterial.symbol3Value" required min="0" max="1"/></label><br/>
+                        </label>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" ng-click="drawCircle(circle)" value="Save" class="btn btn-default">Save</button>
+                    <button type="button" ng-click="reset()" value="Reset" class="btn btn-default">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rectangularModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Rectangular Properties</h4>
+                </div>
+                <div class="modal-body">
+                    <form novalidate class="css-form">
+                        <label>width &#181m: <input class="form-control" type="number" ng-model="rectangular.width" required min="0"/></label><br />
+                        <label>height &#181m: <input class="form-control" type="number" ng-model="rectangular.height" required min="0"/></label><br />
+                        <label>angle: <input class="form-control" type="number" ng-model="rectangular.angle" required min="0"/></label><br />
+                        <label>top position &#181m: <input class="form-control" type="number" ng-model="rectangular.top" required min="0" /></label><br />
+                        <label>left position &#181m: <input class="form-control" type="number" ng-model="rectangular.left" required min="0" /></label><br />
+                        <label>material:
+                            <select class="form-control" ng-model="rectangular.selectedTestMaterial"
+                                    ng-options="material.name for material in materialArr">
+                                <option value="">Select Material</option>
+                            </select>
+                            <label ng-show=rectangular.selectedTestMaterial.symbol1>{{rectangular.selectedTestMaterial.symbol1}}:<input class="form-control" type="number" ng-model="rectangular.selectedTestMaterial.symbol1Value" required min="0" max="1"/></label><br/>
+                            <label ng-show=rectangular.selectedTestMaterial.symbol2>{{rectangular.selectedTestMaterial.symbol2}}:<input class="form-control" type="number" ng-model="rectangular.selectedTestMaterial.symbol2Value" required min="0" max="1"/></label><br/>
+                            <label ng-show=rectangular.selectedTestMaterial.symbol3>{{rectangular.selectedTestMaterial.symbol3}}:<input class="form-control" type="number" ng-model="rectangular.selectedTestMaterial.symbol3Value" required min="0" max="1"/></label><br/>
+                        </label>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" ng-click="drawRectangular(rectangular)" value="Save" class="btn btn-default">Save</button>
+                    <button type="button" ng-click="reset()" value="Reset" class="btn btn-default">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-sm" id="cricleCoordinateModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Circle Dimentions</h4>
+                </div>
+                <div class="modal-body">
+                    <b>Radius:</b><br/>
+                    <b>RadiusX:</b> {{radius.radiusX}} &#181m<br/>
+                    <b>RadiusY:</b> {{radius.radiusY}} &#181m<br/>
+                    <b>Coordinates:</b><br/>
+                    <b>CoordinateX1: </b>{{firstCircCoordinateX}} &#181m<br/>
+                    <b>CoordinateY1: </b>{{firstCircCoordinateY}} &#181m<br/>
+                    <b>CoordinateX2: </b>{{secondCircCoordinateX}} &#181m<br/>
+                    <b>CoordinateY2: </b>{{secondCircCoordinateY}} &#181m<br/>
+                    <b>CoordinateX3: </b>{{thirdCircCoordinateX}} &#181m<br/>
+                    <b>CoordinateY3: </b>{{thirdCircCoordinateY}} &#181m<br/>
+                    <b>CoordinateX4: </b>{{forthCircCoordinateX}} &#181m<br/>
+                    <b>CoordinateY4: </b>{{forthCircCoordinateY}} &#181m<br/>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-sm" id="rectangularCoordinateModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Rectangular Dimentions</h4>
+                </div>
+                <div class="modal-body">
+                    <b>Center points:</b><br/>
+                    <b>Center pointX: </b> {{rectCenterPointX}} &#181m<br/>
+                    <b>Center pointY: </b>{{rectCenterPointY}} &#181m<br/>
+                    <b>Coordinates:</b><br/>
+                    <b>CoordinateX1: </b>{{firstRectCoordinateX}} &#181m<br/>
+                    <b>CoordinateY1: </b>{{firstRectCoordinateY}} &#181m<br/>
+                    <b>CoordinateX2: </b>{{secondRectCoordinateX}} &#181m<br/>
+                    <b>CoordinateY2: </b>{{secondRectCoordinateY}} &#181m<br/>
+                    <b>CoordinateX3: </b>{{thirdRectCoordinateX}} &#181m<br/>
+                    <b>CoordinateY3: </b>{{thirdRectCoordinateY}} &#181m<br/>
+                    <b>CoordinateX4: </b>{{forthRectCoordinateX}} &#181m<br/>
+                    <b>CoordinateY4: </b>{{forthRectCoordinateY}} &#181m<br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<input ng-disabled="!canvasIsAdded" type="submit" value="Add Grid" ng-click="addGrid()"/>-->
+</div>

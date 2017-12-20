@@ -1,0 +1,29 @@
+{
+  "name": "nw-demo",
+  "version": "0.0.1",
+  "main": "index.html",
+  "window": {
+    "toolbar": true,
+    "width": 1600,
+    "height": 1024,
+    "title": "FDFD",
+    "frame": true,
+    "as_desktop": false,
+    "transparent": false,
+    "fullscreen": false
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-ui-tree": "^2.22.6",
+    "fabric": "^2.0.0-rc.3",
+    "jquery": "^3.2.1",
+    "nodewebkit": "^0.11.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodewebkit"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" ng-app="CrosslightApp">
+<head>
+    <link rel="stylesheet" href="./node_modules/angular-ui-tree/dist/angular-ui-tree.min.css">
+    <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="./src/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./src/style/demo.css">
+    <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/color.css">
+
+    <title>FDFD solution</title>
+</head>
+<!-- The ng-app directive -->
+<body class="easyui-layout">
+    <div data-options="region:'north',title:'FDFD Solution',split:true, collapsible:false" style="height:62px; z-index: 1;">
+        <!--<header-menu ng-controller="DrawingToolController"/>-->
+        <div ng-controller="DrawingToolController">
+            <div class="easyui-panel" style="padding:5px;">
+                <a href="#" class="easyui-linkbutton" data-options="plain:true">Home</a>
+                <a id="btn-edit" href="#" class="easyui-menubutton" data-options="menu:'#mm1',iconCls:'icon-edit'">Edit Structure</a>
+                <a href="#" class="easyui-menubutton" data-options="menu:'#mm2',iconCls:'icon-help'">Help</a>
+                <a href="#" class="easyui-menubutton" data-options="menu:'#mm3'">About</a>
+            </div>
+            <div id="mm1" style="width:150px;">
+                <!--<div data-options="iconCls:'icon-undo'">Undo</div>-->
+                <!--<div data-options="iconCls:'icon-redo'">Redo</div>-->
+                <!--<div class="menu-sep"></div>-->
+                <!--<div>Cut</div>-->
+                <!--<div>Copy</div>-->
+                <!--<div>Paste</div>-->
+                <!--<div class="menu-sep"></div>-->
+                <div>
+                    <span>Shapes</span>
+                    <div>
+                        <div ng-show = "canvasIsAdded" ng-click="selectCircle()">Circle</div>
+                        <div ng-show = "canvasIsAdded" ng-click="selectRectangular()">Rectangular</div>
+                        <div ng-show = "!canvasIsAdded" ng-click="selectCanvas()">Add Container</div>
+                        <!--<div class="menu-sep"></div>-->
+                        <!--<div>New Toolbar...</div>-->
+                    </div>
+                </div>
+                <!--<div data-options="iconCls:'icon-remove'">Delete</div>-->
+                <div ng-show = "canvasIsAdded" ng-click="addGrid()">Add Grid</div>
+            </div>
+            <div id="mm2" style="width:100px;">
+                <div>Help</div>
+                <div>Update</div>
+                <div>About</div>
+            </div>
+            <div id="mm3" class="menu-content" style="background:#f0f0f0;padding:10px;text-align:left">
+                <!--<img src="http://www.jeasyui.com/images/logo1.png" style="width:150px;height:50px">-->
+                <!--<p style="font-size:14px;color:#444;">Try jQuery EasyUI to build your modern, interactive, javascript applications.</p>-->
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'south',title:'Output Message',split:true" style="height:300px;"></div>
+    <div data-options="region:'east',title:'East',split:true" style="width:100px;"></div>
+    <div data-options="region:'west',title:'File Tree',split:true" style="width:200px;">
+    <my-customer ng-controller="Controller"/>
+    </div>
+    <div data-options="region:'center',title:'Structure Editor'" style="padding:5px;background:#eee;">
+        <drawing-tool ng-controller="DrawingToolController"></drawing-tool>
+    </div>
+<script type="text/javascript" src="./node_modules/angular/angular.js"></script>
+<script type="text/javascript" src="./node_modules/angular-ui-tree/dist/angular-ui-tree.js"></script>
+<script type="text/javascript" src="./node_modules/fabric/dist/fabric.js"></script>
+<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="./src/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
+<script src="./src/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/app.js"></script>
+<script type="text/javascript" src="./views/filetree/js/filetree.directive.js"></script>
+<script type="text/javascript" src="./views/drawingTool/js/drawingTool.directive.js"></script>
+    <script type="text/javascript" src="./js/nodejs.js"></script>
+</body>
+</html>
+
