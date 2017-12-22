@@ -4,26 +4,85 @@ angular.module('drawingTool.directive', [])
         var fs = require('fs');
 
         $scope.createdObjects = {containers:[], objects:[]};
-        // var canvasWindow = new fabric.Canvas('canvasWindow');
         $scope.master = {};
         $scope.radius = {};
         $scope.selectedObjects = [];
-        $scope.materialNumber = 1;
+        $scope.materialNumber =1;
+        $scope.columns = [{width:0, columnNumber:1}];
+        $scope.layers = [];
+
         var morefile;
         var macfile;
 
-        $scope.addCanvas =  function(addedCanvas) {
-            addedCanvas.type = "container";
-            $scope.createdObjects.containers.push(addedCanvas);
+
+
+        $scope.addLayers = function (layer, columns) {
+            $('#layerDefinerModal').modal('hide');
+            var neLayerNtmber = $scope.layers.length+1;
+            $scope.layers.push({
+                layer:layer,
+                columns:columns,
+            });
+            // $( '#selectMaterial' )[0].reset();
+            console.log($scope.layers);
+            drawLayers();
+        };
+        $scope.previousHieght = 0;
+
+        drawLayers = function () {
+            debugger;
+            var lastlayer= ($scope.layers.slice(-1)[0]);
+            var height = lastlayer.layer.depth;
+            $scope.previousdept= $scope.previousdept+lastlayer.layer.depth;
+            var columns = lastlayer.columns;
+            var left =50;
+            angular.forEach(columns, function (column, key) {
+                console.log(column.width);
+                var rect = new fabric.Rect({
+                    left:left,
+                    top: 500-$scope.previousHieght-height,
+                    fill: column.selectedTestMaterial.color,
+                    width: column.width,
+                    height: height,
+                });
+
+                selectedcanvasWindow.add(rect);
+                left = left+column.width;
+                console.log(left);
+            })
+            $scope.previousHieght = $scope.previousHieght+height;
+        };
+
+        $scope.addColumn = function () {
+            var newColumnNumber = $scope.columns.length+1;
+            $scope.columns.push({
+                columnNumber:newColumnNumber,
+            });
+        };
+
+        $scope.removeColumn = function() {
+            var newColumnNumber = $scope.columns.length-1;
+            if ( newColumnNumber !== 0 ) {
+                $scope.columns.pop();
+            }
+        };
+
+
+        $scope.addStructure = function () {
+            $('#structureModal').modal('hide');
+            console.log($scope.columns);
+            $rootScope.columnsAreDefined= true;
+
+        };
+
+        addCanvas =  function(addedCanvas) {
             var canvas = document.createElement('canvas');
             canvas.setAttribute("id", "canvasWindow");
-            canvas.width = addedCanvas.width*10;
-            canvas.height = addedCanvas.height*10;
+            canvas.width = addedCanvas.width;
+            canvas.height = addedCanvas.height;
             $( "#drawingContainer" ).append(canvas);
             $rootScope.canvasIsAdded = true;
             selectedcanvasWindow = new fabric.Canvas('canvasWindow',{backgroundColor : "white"});
-            $scope.addedCanvas = null;
-            $('#canvasModal').modal('hide');
             selectedcanvasWindow.on('object:moving', function (e) {
                 var obj = e.target;
                 // if object is too big ignore
@@ -105,6 +164,61 @@ angular.module('drawingTool.directive', [])
                 }
             });
         };
+
+        addGrid = function () {
+            debugger;
+            var width = selectedcanvasWindow.width;
+            var height = selectedcanvasWindow.height;
+
+            var j = 0;
+            var line = null;
+            var rect = [];
+            var size = 20;
+
+
+            for (var i = 0; i < Math.ceil(width / 20); ++i) {
+                rect[0] = i * size;
+                rect[1] = 0;
+
+                rect[2] = i * size;
+                rect[3] = height;
+
+                line = null;
+                line = new fabric.Line(rect, {
+                    stroke: '#999',
+                    opacity: 0.5,
+                });
+
+                line.selectable = false;
+                selectedcanvasWindow.add(line);
+                line.sendToBack();
+
+            }
+
+            for (i = 0; i < Math.ceil(height / 20); ++i) {
+                rect[0] = 0;
+                rect[1] = i * size;
+
+                rect[2] = width;
+                rect[3] = i * size;
+
+                line = null;
+                line = new fabric.Line(rect, {
+                    stroke: '#999',
+                    opacity: 0.5,
+                });
+                line.selectable = false;
+                selectedcanvasWindow.add(line);
+                line.sendToBack();
+
+            }
+
+            selectedcanvasWindow.renderAll();
+        };
+
+        addCanvas({width:1610,height:560});
+        addGrid();
+
 
         $scope.readWithfs = function () {
             var fs = require('fs');
@@ -317,56 +431,7 @@ angular.module('drawingTool.directive', [])
         //     selectedcanvasWindow.setActiveObject(group.setCoords()).renderAll();
         // }
 
-        $scope.addGrid = function () {
-            debugger;
-            var width = selectedcanvasWindow.width;
-            var height = selectedcanvasWindow.height;
 
-            var j = 0;
-            var line = null;
-            var rect = [];
-            var size = 20;
-
-
-            for (var i = 0; i < Math.ceil(width / 20); ++i) {
-                rect[0] = i * size;
-                rect[1] = 0;
-
-                rect[2] = i * size;
-                rect[3] = height;
-
-                line = null;
-                line = new fabric.Line(rect, {
-                    stroke: '#999',
-                    opacity: 0.5,
-                });
-
-                line.selectable = false;
-                selectedcanvasWindow.add(line);
-                line.sendToBack();
-
-            }
-
-            for (i = 0; i < Math.ceil(height / 20); ++i) {
-                rect[0] = 0;
-                rect[1] = i * size;
-
-                rect[2] = width;
-                rect[3] = i * size;
-
-                line = null;
-                line = new fabric.Line(rect, {
-                    stroke: '#999',
-                    opacity: 0.5,
-                });
-                line.selectable = false;
-                selectedcanvasWindow.add(line);
-                line.sendToBack();
-
-            }
-
-            selectedcanvasWindow.renderAll();
-        };
 
         // $scope.removeGrid =function () {
         //
@@ -419,6 +484,14 @@ angular.module('drawingTool.directive', [])
         $scope.selectRectangular = function () {
             $('#rectangularModal').modal('show');
         };
+        $scope.selectStructure = function () {
+            $('#structureModal').modal('show');
+        };
+
+        $scope.addLayer = function () {
+            $('#layerDefinerModal').modal('show');
+        };
+
         $scope.selectCanvas = function () {
             $('#canvasModal').modal('show');
         };

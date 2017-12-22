@@ -12,7 +12,7 @@
 </head>
 <!-- The ng-app directive -->
 <body class="easyui-layout">
-    <div data-options="region:'north',title:'FDFD Solution',split:true, collapsible:false" style="height:62px; z-index: 1;">
+    <div data-options="region:'north',title:'Layer Builder',split:true, collapsible:false" style="height:62px; z-index: 1;">
         <!--<header-menu ng-controller="DrawingToolController"/>-->
         <div ng-controller="DrawingToolController">
             <div class="easyui-panel" style="padding:5px;">
@@ -22,25 +22,13 @@
                 <a href="#" class="easyui-menubutton" data-options="menu:'#mm3'">About</a>
             </div>
             <div id="mm1" style="width:150px;">
-                <!--<div data-options="iconCls:'icon-undo'">Undo</div>-->
-                <!--<div data-options="iconCls:'icon-redo'">Redo</div>-->
-                <!--<div class="menu-sep"></div>-->
-                <!--<div>Cut</div>-->
-                <!--<div>Copy</div>-->
-                <!--<div>Paste</div>-->
-                <!--<div class="menu-sep"></div>-->
                 <div>
-                    <span>Shapes</span>
+                    <span>Layer Builder</span>
                     <div>
-                        <div ng-show = "canvasIsAdded" ng-click="selectCircle()">Circle</div>
-                        <div ng-show = "canvasIsAdded" ng-click="selectRectangular()">Rectangular</div>
-                        <div ng-show = "!canvasIsAdded" ng-click="selectCanvas()">Add Container</div>
-                        <!--<div class="menu-sep"></div>-->
-                        <!--<div>New Toolbar...</div>-->
+                        <div ng-show = "!columnsAreDefined" ng-click="selectStructure()">Structure</div>
+                        <div ng-show = "columnsAreDefined" ng-click="addLayer()">Add layers</div>
                     </div>
                 </div>
-                <!--<div data-options="iconCls:'icon-remove'">Delete</div>-->
-                <div ng-show = "canvasIsAdded" ng-click="addGrid()">Add Grid</div>
             </div>
             <div id="mm2" style="width:100px;">
                 <div>Help</div>
