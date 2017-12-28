@@ -17,27 +17,29 @@ angular.module('drawingTool.directive', [])
 
 
         $scope.addLayers = function (layer, columns) {
+            debugger;
+            console.log($scope.layers);
+            console.log(layer)
+            console.log(columns)
+            console.log()
             $('#layerDefinerModal').modal('hide');
-            var neLayerNtmber = $scope.layers.length+1;
             $scope.layers.push({
                 layer:layer,
                 columns:columns,
             });
+            console.log($scope.layers)
             // $( '#selectMaterial' )[0].reset();
-            console.log($scope.layers);
             drawLayers();
         };
         $scope.previousHieght = 0;
 
         drawLayers = function () {
-            debugger;
             var lastlayer= ($scope.layers.slice(-1)[0]);
             var height = lastlayer.layer.depth;
             $scope.previousdept= $scope.previousdept+lastlayer.layer.depth;
             var columns = lastlayer.columns;
             var left =50;
             angular.forEach(columns, function (column, key) {
-                console.log(column.width);
                 var rect = new fabric.Rect({
                     left:left,
                     top: 500-$scope.previousHieght-height,
@@ -48,7 +50,6 @@ angular.module('drawingTool.directive', [])
 
                 selectedcanvasWindow.add(rect);
                 left = left+column.width;
-                console.log(left);
             })
             $scope.previousHieght = $scope.previousHieght+height;
         };
@@ -67,12 +68,86 @@ angular.module('drawingTool.directive', [])
             }
         };
 
-
         $scope.addStructure = function () {
             $('#structureModal').modal('hide');
-            console.log($scope.columns);
             $rootScope.columnsAreDefined= true;
+        };
 
+        $scope.writeLayerFile = function () {
+            var data = formatLayerFile();
+            fs.writeFile("./outputfiles/test.layer", data, function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("Layer file was saved!");
+            });
+
+        };
+
+        formatLayerFile = function () {
+            var ouputTextString = "begin_layer"+"\n";
+            $scope.columns.forEach(function (column) {
+                var columnNumber = "column column_num="+column.columnNumber;
+                var width = " W= "+column.width;
+                ouputTextString = ouputTextString + columnNumber + width + "\n";
+            });
+
+            $scope.layers.forEach(function (layer) {
+                var columns = layer.columns;
+                columns.forEach(function (column) {
+                    var columnMaterial = "layer_mater macro_name="+column.selectedTestMaterial.name;
+                    if(column.selectedTestMaterial.symbol1){
+                        var symbol1 = "var_symbol1="+column.selectedTestMaterial.symbol1+" "+"var1="+ column.selectedTestMaterial.symbol1Value;
+                    }else{
+                        symbol1 ="";
+                    }
+                    if(column.selectedTestMaterial.symbol2){
+                        var symbol2 = "var_symbol2="+column.selectedTestMaterial.symbol2+" "+"var2="+ column.selectedTestMaterial.symbol2Value;
+                    }else{
+                        symbol2 ="";
+                    }
+                    if(column.selectedTestMaterial.symbol3){
+                        var symbol3 = "var_symbol3="+column.selectedTestMaterial.symbol3+" "+"var3="+ column.selectedTestMaterial.symbol3Value;
+                    }else{
+                        symbol3 ="";
+                    }
+                    ouputTextString = ouputTextString + columnMaterial +" "+symbol1 +" "+ symbol2 +" "+ symbol3 + "\n";
+                })
+            });
+            // materialInfo.objects.forEach(function (object) {
+            //     if(object.selectedTestMaterial.symbol1){
+            //         var symbol1 = "var_symbol1="+object.selectedTestMaterial.symbol1+" "+"var1="+ object.selectedTestMaterial.symbol1Value
+            //     }else{
+            //         symbol1 ="";
+            //     }
+            //     if(object.selectedTestMaterial.symbol2){
+            //         var symbol2 = "var_symbol2="+object.selectedTestMaterial.symbol2+" "+"var2="+ object.selectedTestMaterial.symbol2Value
+            //     }else{
+            //         symbol2 ="";
+            //     }
+            //     if(object.selectedTestMaterial.symbol3){
+            //         var symbol3 = "var_symbol3="+object.selectedTestMaterial.symbol3+" "+"var3="+ object.selectedTestMaterial.symbol3Value
+            //     }else{
+            //         symbol3 ="";
+            //     }
+            //     var objectString = "material_lib name="+object.selectedTestMaterial.name+"  mater="+object.materialNumber+" "+symbol1+" "+symbol2+" "+symbol3;
+            //     var newObjectString = "";
+            //     var maxCharacterAllowed = 80;
+            //     var objectStringArray = objectString.split(" ");
+            //     objectStringArray.forEach(function (e) {
+            //         if(newObjectString.length + e.length < maxCharacterAllowed){
+            //             newObjectString = newObjectString + e+" ";
+            //         }else {
+            //             newObjectString = newObjectString+ " &&"+"\n"+e+" ";
+            //             maxCharacterAllowed = maxCharacterAllowed + 80;
+            //         }
+            //
+            //     });
+            //     ouputTextString= ouputTextString+ newObjectString+"\n";
+            //     console.log(object);
+            // });
+            ouputTextString = ouputTextString+"\n"+"end_layer";
+            return ouputTextString;
         };
 
         addCanvas =  function(addedCanvas) {
@@ -102,25 +177,6 @@ angular.module('drawingTool.directive', [])
                 }
             });
             selectedcanvasWindow.on('object:modified', function(options) {
-                if (options.target && options.target.type == "circle") {
-                    $scope.radius.radiusX = (options.target.getRadiusX()/10).toFixed(2);
-                    $scope.radius.radiusY = (options.target.getRadiusY()/10).toFixed(2);
-                    $scope.firstCircCoordinateX = (options.target.getCoords()[0].x/10).toFixed(2);
-                    $scope.firstCircCoordinateY = (options.target.getCoords()[0].y/10).toFixed(2);
-                    $scope.secondCircCoordinateX = (options.target.getCoords()[1].x/10).toFixed(2);
-                    $scope.secondCircCoordinateY = (options.target.getCoords()[1].y/10).toFixed(2);
-                    $scope.thirdCircCoordinateX = (options.target.getCoords()[2].x/10).toFixed(2);
-                    $scope.thirdCircCoordinateY = (options.target.getCoords()[2].y/10).toFixed(2);
-                    $scope.forthCircCoordinateX = (options.target.getCoords()[3].x/10).toFixed(2);
-                    $scope.forthCircCoordinateY = (options.target.getCoords()[3].y/10).toFixed(2);
-                    $timeout (function () {
-                        $('#cricleCoordinateModal').modal('show');
-                        $('.modal-backdrop').removeClass("modal-backdrop");
-                        $("#cricleCoordinateModal").draggable({
-                            handle: ".modal-header"
-                        });
-                    }, 0)
-                }
                 if (options.target && options.target.type == "rect") {
                     $scope.rectCenterPointX = (options.target.getCenterPoint().x/10).toFixed(2);
                     $scope.rectCenterPointY = (options.target.getCenterPoint().y/10).toFixed(2);
@@ -146,16 +202,7 @@ angular.module('drawingTool.directive', [])
                 console.log(options.target.type);
             });
 
-            // selectedcanvasWindow.on('object:moving', function(options) {
-            //     console.log("moving");
-            // });
-            //
-            // selectedcanvasWindow.on('object:scaling', function(options) {
-            //     console.log("scaling");
-            // });
-
             selectedcanvasWindow.on('selection:created', function (selections) {
-                debugger;
                 if (selections.target.type === 'activeSelection') {
                     angular.forEach(selections, function (selections) {
                         $scope.selectedObjects.push(selections);
@@ -166,7 +213,6 @@ angular.module('drawingTool.directive', [])
         };
 
         addGrid = function () {
-            debugger;
             var width = selectedcanvasWindow.width;
             var height = selectedcanvasWindow.height;
 
@@ -407,7 +453,6 @@ angular.module('drawingTool.directive', [])
         }
 
         readCrosslightAndMoreFile = function () {
-            debugger;
             readCrosslightFile();
             var allText = morefile + macfile;
             populateMaterialCombo(allText);
@@ -416,7 +461,6 @@ angular.module('drawingTool.directive', [])
         readCrosslightAndMoreFile();
 
         // $scope.getObjects= function () {
-        //     debugger;
         //     var objs = selectedcanvasWindow.getObjects().map(function(o) {
         //         return o.set('active', true);
         //     });
@@ -431,28 +475,6 @@ angular.module('drawingTool.directive', [])
         //     selectedcanvasWindow.setActiveObject(group.setCoords()).renderAll();
         // }
 
-
-
-        // $scope.removeGrid =function () {
-        //
-        // };
-
-        $scope.drawCircle = function(circle) {
-            circle.type = "circle";
-            circle.materialNumber = $scope.materialNumber;
-            $scope.createdObjects.objects.push(circle);
-            $scope.materialNumber++;
-            $scope.master = angular.copy(circle);
-            var circ = new fabric.Circle({
-                left: circle.left*10,
-                top: circle.top*10,
-                fill: circle.selectedTestMaterial.color,
-                radius: circle.radius*10,
-            });
-            selectedcanvasWindow.add(circ);
-            $scope.circle = null;
-            $('#circleModal').modal('hide');
-        };
 
         $scope.drawRectangular = function(rectangular) {
             rectangular.type = "rectangular";
@@ -478,12 +500,6 @@ angular.module('drawingTool.directive', [])
             $scope.rectangular = angular.copy($scope.master);
         };
 
-        $scope.selectCircle = function () {
-            $('#circleModal').modal('show');
-        };
-        $scope.selectRectangular = function () {
-            $('#rectangularModal').modal('show');
-        };
         $scope.selectStructure = function () {
             $('#structureModal').modal('show');
         };
