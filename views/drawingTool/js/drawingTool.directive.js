@@ -8,44 +8,41 @@ angular.module('drawingTool.directive', [])
         $scope.radius = {};
         $scope.selectedObjects = [];
         $scope.materialNumber =1;
-        $scope.columns = [{width:0, columnNumber:1}];
+        $scope.columns = [{columnNumber:1}];
         $scope.layers = [];
+        $rootScope.layerIsCreated = false;
 
         var morefile;
         var macfile;
 
-
-
-        $scope.addLayers = function (layer, columns) {
-            debugger;
-            console.log($scope.layers);
-            console.log(layer)
-            console.log(columns)
-            console.log()
+        $scope.addLayers = function () {
             $('#layerDefinerModal').modal('hide');
-            $scope.layers.push({
-                layer:layer,
-                columns:columns,
-            });
+            var layerDimention = {};
+            var columns = [];
+            angular.copy($scope.layerDimention,layerDimention);
+            angular.copy($scope.columns,columns);
+            $scope.layers.push({layerDimention:layerDimention,columns:columns});
             console.log($scope.layers)
-            // $( '#selectMaterial' )[0].reset();
             drawLayers();
         };
         $scope.previousHieght = 0;
 
         drawLayers = function () {
+            $rootScope.layerIsCreated =true;
             var lastlayer= ($scope.layers.slice(-1)[0]);
-            var height = lastlayer.layer.depth;
-            $scope.previousdept= $scope.previousdept+lastlayer.layer.depth;
+            var height = lastlayer.layerDimention.depth;
+            $scope.previousdept= $scope.previousdept+lastlayer.layerDimention.depth;
             var columns = lastlayer.columns;
-            var left =50;
+            var left =200;
             angular.forEach(columns, function (column, key) {
                 var rect = new fabric.Rect({
                     left:left,
-                    top: 500-$scope.previousHieght-height,
+                    top: 650-$scope.previousHieght-height,
                     fill: column.selectedTestMaterial.color,
                     width: column.width,
                     height: height,
+                    stroke: 'black',
+                    strokeWidth: .5,
                 });
 
                 selectedcanvasWindow.add(rect);
@@ -262,7 +259,7 @@ angular.module('drawingTool.directive', [])
             selectedcanvasWindow.renderAll();
         };
 
-        addCanvas({width:1610,height:560});
+        addCanvas({width:1860,height:890});
         addGrid();
 
 

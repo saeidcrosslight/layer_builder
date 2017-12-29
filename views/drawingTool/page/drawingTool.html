@@ -1,6 +1,4 @@
 <div id = "drawingContainer">
-    <button ng-click="writeLayerFile()">write Layer File</button>
-
     <div class="modal fade" id="layerDefinerModal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -9,23 +7,24 @@
                     <h4 class="modal-title">Layer Properties</h4>
                 </div>
                 <div class="modal-body">
-                    <form novalidate id ="selectMaterial" class="css-form">
-                        <label>Layer Depth &#181m: <input class="form-control" type="number" ng-model="layer.depth" required min="0" /></label><br />
+                    <form name="layerForm" id ="selectMaterial" class="css-form">
+                        <label>Layer Depth &#181m: <input name="layerDepth" class="form-control" type="number" ng-model="layerDimention.depth" required min="0" /></label><br />
+                        <span style="color: red" ng-show="layerForm.layerDepth.$dirty && layerForm.layerDepth.$error.required">Layer Depth is Required</span><br />
                         <div ng-repeat="column in columns">
                             <label>material:
                                 <select class="form-control" ng-init="column.selectedTestMaterial = materialArr[55]" ng-model="column.selectedTestMaterial"
                                         ng-options="material.name for material in materialArr">
                                 </select>
-                                <label ng-show=column.selectedTestMaterial.symbol1>{{column.selectedTestMaterial.symbol1}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol1Value" required min="0" max="1"/></label><br/>
-                                <label ng-show=column.selectedTestMaterial.symbol2>{{column.selectedTestMaterial.symbol2}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol2Value" required min="0" max="1"/></label><br/>
-                                <label ng-show=column.selectedTestMaterial.symbol3>{{column.selectedTestMaterial.symbol3}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol3Value" required min="0" max="1"/></label><br/>
+                                <label ng-show=column.selectedTestMaterial.symbol1>{{column.selectedTestMaterial.symbol1}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol1Value" min="0" max="1"/></label><br/>
+                                <label ng-show=column.selectedTestMaterial.symbol2>{{column.selectedTestMaterial.symbol2}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol2Value" min="0" max="1"/></label><br/>
+                                <label ng-show=column.selectedTestMaterial.symbol3>{{column.selectedTestMaterial.symbol3}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol3Value" min="0" max="1"/></label><br/>
                             </label>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" ng-click="addLayers(layer, columns)" value="Save" class="btn btn-default">Save</button>
+                    <button type="button" ng-disabled="layerForm.$invalid" ng-click="addLayers()" value="Save" class="btn btn-default">Save</button>
                     <button type="button" ng-click="reset()" value="Reset" class="btn btn-default">Reset</button>
                 </div>
             </div>
@@ -36,23 +35,23 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Structure Properties</h4>
+                    <h4 class="modal-title">Columns Properties</h4>
                 </div>
                 <div class="modal-body">
-                    <label novalidate class="css-form">
+                    <form name="columnForm" class="css-form">
                         <div ng-repeat="column in columns">
-                            <label>Width &#181m: <input class="form-control" type="number" ng-model="column.width" required min="0" /></label><br />
-                            <label>columnNumber: <input class="form-control" type="number" ng-model="column.columnNumber" required min="0" ng-disabled="true"/></label><br />
+                            <label>Width &#181m: <input name="columnWidth" class="form-control" type="number" ng-model="column.width" required min="0" /></label><br />
+                            <span style="color: red" ng-show="columnForm.columnWidth.$dirty && columnForm.columnWidth.$error.required">Width is Required!</span><br />
+                            <label>columnNumber: <input name="numberOfColumns" class="form-control" type="number" ng-model="column.columnNumber" required min="0" ng-disabled="true"/></label><br />
 
                         </div>
                         <label><button type="button" class="btn btn-default" ng-click="addColumn()">Add Column</button></label><br />
                         <label><button type="button" class="btn btn-default" ng-click="removeColumn()">Remove Column</button></label>
-                    </label>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" ng-click="addStructure()" value="Save" class="btn btn-default">Save</button>
+                    <button type="button" ng-disabled="columnForm.$invalid" ng-click="addStructure()" value="Save" class="btn btn-default">Save</button>
                     <button type="button" ng-click="reset()" value="Reset" class="btn btn-default">Reset</button>
                 </div>
             </div>
