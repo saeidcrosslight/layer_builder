@@ -11,7 +11,6 @@ angular.module('drawingTool.directive', [])
         $scope.columns = [{columnNumber:1}];
         $scope.layers = [];
         $rootScope.layerIsCreated = false;
-
         var morefile;
         var macfile;
 
@@ -22,8 +21,15 @@ angular.module('drawingTool.directive', [])
             angular.copy($scope.layerDimention,layerDimention);
             angular.copy($scope.columns,columns);
             $scope.layers.push({layerDimention:layerDimention,columns:columns});
-            console.log($scope.layers)
+            debugger;
+            console.log($scope.columns);
             drawLayers();
+            // $("#selectMaterial")[0].reset();
+            // angular.forEach($scope.columns, function (column) {
+            //     delete [column.selectedTestMaterial.symbol1]
+            //     delete [column.selectedTestMaterial.symbol2]
+            //     delete [column.selectedTestMaterial.symbol3]
+            // })
         };
         $scope.previousHieght = 0;
 
@@ -82,15 +88,16 @@ angular.module('drawingTool.directive', [])
         };
 
         formatLayerFile = function () {
-            var ouputTextString = "begin_layer"+"\n";
+            var layerString = "begin_layer"+"\n";
             $scope.columns.forEach(function (column) {
                 var columnNumber = "column column_num="+column.columnNumber;
-                var width = " W= "+column.width;
-                ouputTextString = ouputTextString + columnNumber + width + "\n";
+                var width = " W="+column.width;
+                layerString = layerString + columnNumber + width + "\n";
             });
 
             $scope.layers.forEach(function (layer) {
                 var columns = layer.columns;
+                var layerDepth = layer.layerDimention.depth;
                 columns.forEach(function (column) {
                     var columnMaterial = "layer_mater macro_name="+column.selectedTestMaterial.name;
                     if(column.selectedTestMaterial.symbol1){
@@ -108,43 +115,29 @@ angular.module('drawingTool.directive', [])
                     }else{
                         symbol3 ="";
                     }
-                    ouputTextString = ouputTextString + columnMaterial +" "+symbol1 +" "+ symbol2 +" "+ symbol3 + "\n";
+                    var eachLayerMaterial = columnMaterial +" "+symbol1 +" "+ symbol2 +" "+ symbol3;
+                    var formatedEachLayerMaterial = formatCharacterCountPerLine(eachLayerMaterial);
+                    layerString = layerString + formatedEachLayerMaterial + "\n";
                 })
+                layerString = layerString+"layer d = "+layerDepth +"\n";
             });
-            // materialInfo.objects.forEach(function (object) {
-            //     if(object.selectedTestMaterial.symbol1){
-            //         var symbol1 = "var_symbol1="+object.selectedTestMaterial.symbol1+" "+"var1="+ object.selectedTestMaterial.symbol1Value
-            //     }else{
-            //         symbol1 ="";
-            //     }
-            //     if(object.selectedTestMaterial.symbol2){
-            //         var symbol2 = "var_symbol2="+object.selectedTestMaterial.symbol2+" "+"var2="+ object.selectedTestMaterial.symbol2Value
-            //     }else{
-            //         symbol2 ="";
-            //     }
-            //     if(object.selectedTestMaterial.symbol3){
-            //         var symbol3 = "var_symbol3="+object.selectedTestMaterial.symbol3+" "+"var3="+ object.selectedTestMaterial.symbol3Value
-            //     }else{
-            //         symbol3 ="";
-            //     }
-            //     var objectString = "material_lib name="+object.selectedTestMaterial.name+"  mater="+object.materialNumber+" "+symbol1+" "+symbol2+" "+symbol3;
-            //     var newObjectString = "";
-            //     var maxCharacterAllowed = 80;
-            //     var objectStringArray = objectString.split(" ");
-            //     objectStringArray.forEach(function (e) {
-            //         if(newObjectString.length + e.length < maxCharacterAllowed){
-            //             newObjectString = newObjectString + e+" ";
-            //         }else {
-            //             newObjectString = newObjectString+ " &&"+"\n"+e+" ";
-            //             maxCharacterAllowed = maxCharacterAllowed + 80;
-            //         }
-            //
-            //     });
-            //     ouputTextString= ouputTextString+ newObjectString+"\n";
-            //     console.log(object);
-            // });
-            ouputTextString = ouputTextString+"\n"+"end_layer";
-            return ouputTextString;
+            layerString = layerString+"end_layer";
+            return layerString;
+        };
+
+        formatCharacterCountPerLine = function(string) {
+            var outputString  = "";
+            var maxCharacterAllowed = 80;
+            var outputStringArray = string.split(" ");
+            outputStringArray.forEach(function (e) {
+                if(outputString.length + e.length < maxCharacterAllowed){
+                    outputString = outputString + e+ " ";
+                }else{
+                    outputString = outputString+" &&"+"\n"+e+" ";
+                    maxCharacterAllowed = maxCharacterAllowed + 80;
+                }
+            })
+            return outputString;
         };
 
         addCanvas =  function(addedCanvas) {
@@ -197,15 +190,6 @@ angular.module('drawingTool.directive', [])
 
             selectedcanvasWindow.on('object:added', function(options) {
                 console.log(options.target.type);
-            });
-
-            selectedcanvasWindow.on('selection:created', function (selections) {
-                if (selections.target.type === 'activeSelection') {
-                    angular.forEach(selections, function (selections) {
-                        $scope.selectedObjects.push(selections);
-
-                    })
-                }
             });
         };
 
@@ -261,115 +245,6 @@ angular.module('drawingTool.directive', [])
 
         addCanvas({width:1860,height:890});
         addGrid();
-
-
-        $scope.readWithfs = function () {
-            var fs = require('fs');
-            fs.readFile('./src/crosslight.mac', function (err,data) {
-                if(err){
-                    console.log(err);
-                }else{
-                    console.log(data.toString());
-                }
-            })
-        };
-        formatMaterialFile = function (materialInfo) {
-            var ouputTextString = "";
-            materialInfo.containers.forEach(function (container) {
-                console.log(container);
-                if(container.selectedTestMaterial.symbol1){
-                    var symbol1 = "var_symbol1="+container.selectedTestMaterial.symbol1+" "+"var1="+ container.selectedTestMaterial.symbol1Value
-                }else{
-                    symbol1 ="";
-                }
-                if(container.selectedTestMaterial.symbol2){
-                    var symbol2 = "var_symbol2="+container.selectedTestMaterial.symbol2+" "+"var2="+ container.selectedTestMaterial.symbol2Value
-                }else{
-                    symbol2 ="";
-                }
-                if(container.selectedTestMaterial.symbol3){
-                    var symbol3 = "var_symbol3="+container.selectedTestMaterial.symbol3+" "+"var3="+ container.selectedTestMaterial.symbol3Value
-                }else{
-                    symbol3 ="";
-                }
-                var objectString = "material_lib name="+container.selectedTestMaterial.name+ "  type="+container.type+" "+symbol1+" "+symbol2+" "+symbol3;
-                var newObjectString = "";
-                var maxCharacterAllowed = 80;
-                var objectStringArray = objectString.split(" ");
-                objectStringArray.forEach(function (e) {
-                    if(newObjectString.length + e.length < maxCharacterAllowed){
-                        newObjectString = newObjectString + e+" ";
-                    }else {
-                        newObjectString = newObjectString+ " &&"+"\n"+e+" ";
-                        maxCharacterAllowed = maxCharacterAllowed + 80;
-                    }
-
-                });
-                ouputTextString= ouputTextString+ newObjectString+"\n";
-            });
-            materialInfo.objects.forEach(function (object) {
-                if(object.selectedTestMaterial.symbol1){
-                    var symbol1 = "var_symbol1="+object.selectedTestMaterial.symbol1+" "+"var1="+ object.selectedTestMaterial.symbol1Value
-                }else{
-                    symbol1 ="";
-                }
-                if(object.selectedTestMaterial.symbol2){
-                    var symbol2 = "var_symbol2="+object.selectedTestMaterial.symbol2+" "+"var2="+ object.selectedTestMaterial.symbol2Value
-                }else{
-                    symbol2 ="";
-                }
-                if(object.selectedTestMaterial.symbol3){
-                    var symbol3 = "var_symbol3="+object.selectedTestMaterial.symbol3+" "+"var3="+ object.selectedTestMaterial.symbol3Value
-                }else{
-                    symbol3 ="";
-                }
-                var objectString = "material_lib name="+object.selectedTestMaterial.name+"  mater="+object.materialNumber+" "+symbol1+" "+symbol2+" "+symbol3;
-                var newObjectString = "";
-                var maxCharacterAllowed = 80;
-                var objectStringArray = objectString.split(" ");
-                objectStringArray.forEach(function (e) {
-                    if(newObjectString.length + e.length < maxCharacterAllowed){
-                        newObjectString = newObjectString + e+" ";
-                    }else {
-                        newObjectString = newObjectString+ " &&"+"\n"+e+" ";
-                        maxCharacterAllowed = maxCharacterAllowed + 80;
-                    }
-
-                });
-                ouputTextString= ouputTextString+ newObjectString+"\n";
-                console.log(object);
-            });
-            return ouputTextString;
-        };
-
-        formatGeoFile = function (materialInfo) {
-            var ouputTextString = "";
-            materialInfo.objects.forEach(function (object) {
-                console.log(object);
-            });
-            return ouputTextString;
-        };
-
-        $scope.writeMaterialFile = function () {
-            var data = formatMaterialFile($scope.createdObjects);
-            fs.writeFile("./outputfiles/test.mater", data, function(err) {
-                if(err) {
-                    return console.log(err);
-                }
-                console.log("Material file was saved!");
-            });
-
-        };
-        $scope.writeGeoFile = function () {
-            var data = formatGeoFile($scope.createdObjects);
-            fs.writeFile("./outputfiles/test.geo", data, function(err) {
-                if(err) {
-                    return console.log(err);
-                }
-                console.log("Geo file was saved!");
-            });
-
-        };
 
         readCrosslightFile =  function (){
             var rawFile1 = new XMLHttpRequest();
@@ -457,41 +332,6 @@ angular.module('drawingTool.directive', [])
         }
         readCrosslightAndMoreFile();
 
-        // $scope.getObjects= function () {
-        //     var objs = selectedcanvasWindow.getObjects().map(function(o) {
-        //         return o.set('active', true);
-        //     });
-        //
-        //     var group = new fabric.Group(objs, {
-        //         originX: 'center',
-        //         originY: 'center'
-        //     });
-        //
-        //     selectedcanvasWindow._activeObject = null;
-        //
-        //     selectedcanvasWindow.setActiveObject(group.setCoords()).renderAll();
-        // }
-
-
-        $scope.drawRectangular = function(rectangular) {
-            rectangular.type = "rectangular";
-            rectangular.materialNumber = $scope.materialNumber;
-            $scope.createdObjects.objects.push(rectangular);
-            $scope.materialNumber++;
-            $scope.master = angular.copy(rectangular);
-            var rect = new fabric.Rect({
-                left: rectangular.left*10,
-                top: rectangular.top*10,
-                fill: rectangular.selectedTestMaterial.color,
-                width: rectangular.width*10,
-                height: rectangular.height*10,
-                angle: rectangular.angle
-            });
-            selectedcanvasWindow.add(rect);
-            $scope.rectangular = null;
-            $('#rectangularModal').modal('hide');
-        };
-
         $scope.reset = function() {
             $scope.circle = angular.copy($scope.master);
             $scope.rectangular = angular.copy($scope.master);
@@ -503,10 +343,6 @@ angular.module('drawingTool.directive', [])
 
         $scope.addLayer = function () {
             $('#layerDefinerModal').modal('show');
-        };
-
-        $scope.selectCanvas = function () {
-            $('#canvasModal').modal('show');
         };
     }])
 
