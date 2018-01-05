@@ -8,7 +8,7 @@ angular.module('drawingTool.directive', [])
         $scope.radius = {};
         $scope.selectedObjects = [];
         $scope.materialNumber =1;
-        $scope.columns = [{columnNumber:1}];
+        $scope.columns = [{columnNumber:1, IsVisible:false}];
         $scope.layers = [];
         $rootScope.layerIsCreated = false;
         var morefile;
@@ -18,18 +18,20 @@ angular.module('drawingTool.directive', [])
             $('#layerDefinerModal').modal('hide');
             var layerDimention = {};
             var columns = [];
+            debugger;
             angular.copy($scope.layerDimention,layerDimention);
             angular.copy($scope.columns,columns);
             $scope.layers.push({layerDimention:layerDimention,columns:columns});
-            debugger;
-            console.log($scope.columns);
             drawLayers();
             // $("#selectMaterial")[0].reset();
             // angular.forEach($scope.columns, function (column) {
-            //     delete [column.selectedTestMaterial.symbol1]
-            //     delete [column.selectedTestMaterial.symbol2]
-            //     delete [column.selectedTestMaterial.symbol3]
-            // })
+            //     delete column.selectedTestMaterial.symbol1;
+            //     delete column.selectedTestMaterial.symbol1Value;
+            //     delete column.selectedTestMaterial.symbol2;
+            //     delete column.selectedTestMaterial.symbol2Value;
+            //     delete column.selectedTestMaterial.symbol3;
+            //     delete column.selectedTestMaterial.symbol3Value;
+            // });
         };
         $scope.previousHieght = 0;
 
@@ -61,6 +63,7 @@ angular.module('drawingTool.directive', [])
             var newColumnNumber = $scope.columns.length+1;
             $scope.columns.push({
                 columnNumber:newColumnNumber,
+                IsVisible:false
             });
         };
 
@@ -283,6 +286,7 @@ angular.module('drawingTool.directive', [])
             var colors = ["aliceblue","antiquewhite","aqua","aquamarine","azure","beige","bisque","black","blanchedalmond","blue","blueviolet","brown","burlywood","cadetblue","chartreuse","chocolate","coral","cornflowerblue","cornsilk","crimson","cyan","darkblue","darkcyan","darkgoldenrod","darkgray","darkgrey","darkgreen","darkkhaki","darkmagenta","darkolivegreen","darkorange","darkorchid","darkred","darksalmon","darkseagreen","darkslateblue","darkslategray","darkslategrey","darkturquoise","darkviolet","deeppink","deepskyblue","dimgray","dimgrey","dodgerblue","firebrick","floralwhite","forestgreen","fuchsia","gainsboro","ghostwhite","gold","goldenrod","gray","grey","green","greenyellow","honeydew","hotpink","indianred","indigo","ivory","khaki","lavender","lavenderblush","lawngreen","lemonchiffon","lightblue","lightcoral","lightcyan","lightgoldenrodyellow","lightgray","lightgrey","lightgreen","lightpink","lightsalmon","lightseagreen","lightskyblue","lightslategray","lightslategrey","lightsteelblue","lightyellow","lime","limegreen","linen","magenta","maroon","mediumaquamarine","mediumblue","mediumorchid","mediumpurple","mediumseagreen","mediumslateblue","mediumspringgreen","mediumturquoise","mediumvioletred","midnightblue","mintcream","mistyrose","moccasin","navajowhite","navy","oldlace","olive","olivedrab","orange","orangered","orchid","palegoldenrod","palegreen","paleturquoise","palevioletred","papayawhip","peachpuff","peru","pink","plum","powderblue","purple","rebeccapurple","red","rosybrown","royalblue","saddlebrown","salmon","sandybrown","seagreen","seashell","sienna","silver","skyblue","slateblue","slategray","slategrey","snow","springgreen","steelblue","tan","teal","thistle","tomato","turquoise","violet","wheat","white","whitesmoke","yellow","yellowgreen"];
             extractedArr.forEach(function (item,index) {
                 var material = {};
+                material.info = item;
                 material.color= colors[index]
                 if(item.indexOf("name")>-1){
                     var nameIndex = item.indexOf("name"),
@@ -344,6 +348,11 @@ angular.module('drawingTool.directive', [])
         $scope.addLayer = function () {
             $('#layerDefinerModal').modal('show');
         };
+        $scope.expand = function () {
+            debugger;
+            console.log(this);
+            this.column.IsVisible = this.column.IsVisible ? false : true;
+        }
     }])
 
     .directive('drawingTool', function() {

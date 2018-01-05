@@ -14,7 +14,9 @@
                             <label>material:
                                 <select class="form-control" ng-init="column.selectedTestMaterial = materialArr[55]" ng-model="column.selectedTestMaterial"
                                         ng-options="material.name for material in materialArr">
-                                </select>
+                                </select><br/>
+                                <button type="button" class="btn btn-default" ng-click="expand()">Show/hide Material Description</button><br/>
+                                <textarea ng-show="column.IsVisible" style="width: 400px; height: 150px" ng-bind="column.selectedTestMaterial.info"></textarea><br/>
                                 <label ng-show=column.selectedTestMaterial.symbol1>{{column.selectedTestMaterial.symbol1}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol1Value" min="0" max="1"/></label><br/>
                                 <label ng-show=column.selectedTestMaterial.symbol2>{{column.selectedTestMaterial.symbol2}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol2Value" min="0" max="1"/></label><br/>
                                 <label ng-show=column.selectedTestMaterial.symbol3>{{column.selectedTestMaterial.symbol3}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol3Value" min="0" max="1"/></label><br/>
@@ -45,7 +47,7 @@
                             <label>columnNumber: <input name="numberOfColumns" class="form-control" type="number" ng-model="column.columnNumber" required min="0" ng-disabled="true"/></label><br />
 
                         </div>
-                        <label><button type="button" class="btn btn-default" ng-click="addColumn()">Add Column</button></label><br />
+                        <label><button type="button" class="btn btn-default" ng-click="addColumn()">Add Column</button></label>
                         <label><button type="button" class="btn btn-default" ng-click="removeColumn()">Remove Column</button></label>
                     </form>
                 </div>
