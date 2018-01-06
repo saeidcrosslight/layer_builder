@@ -6,11 +6,12 @@
     "toolbar": true,
     "width": 1600,
     "height": 1024,
-    "title": "FDFD",
+    "title": "Layer Builder",
     "frame": true,
     "as_desktop": false,
     "transparent": false,
-    "fullscreen": false
+    "fullscreen": false,
+    "icon":"logo.png"
   },
   "dependencies": {
     "angular": "^1.6.6",

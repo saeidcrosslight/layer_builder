@@ -22,6 +22,7 @@ angular.module('drawingTool.directive', [])
             angular.copy($scope.layerDimention,layerDimention);
             angular.copy($scope.columns,columns);
             $scope.layers.push({layerDimention:layerDimention,columns:columns});
+            debugger;
             drawLayers();
             // $("#selectMaterial")[0].reset();
             // angular.forEach($scope.columns, function (column) {
@@ -103,6 +104,7 @@ angular.module('drawingTool.directive', [])
                 var layerDepth = layer.layerDimention.depth;
                 columns.forEach(function (column) {
                     var columnMaterial = "layer_mater macro_name="+column.selectedTestMaterial.name;
+                    var columnNumber = "column_num="+column.columnNumber;
                     if(column.selectedTestMaterial.symbol1){
                         var symbol1 = "var_symbol1="+column.selectedTestMaterial.symbol1+" "+"var1="+ column.selectedTestMaterial.symbol1Value;
                     }else{
@@ -118,7 +120,7 @@ angular.module('drawingTool.directive', [])
                     }else{
                         symbol3 ="";
                     }
-                    var eachLayerMaterial = columnMaterial +" "+symbol1 +" "+ symbol2 +" "+ symbol3;
+                    var eachLayerMaterial = columnMaterial +" "+columnNumber+" "+symbol1 +" "+ symbol2 +" "+ symbol3;
                     var formatedEachLayerMaterial = formatCharacterCountPerLine(eachLayerMaterial);
                     layerString = layerString + formatedEachLayerMaterial + "\n";
                 })

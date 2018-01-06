@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="./src/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./src/style/demo.css">
+    <link rel="stylesheet" type="text/css" href="src/style/style.css">
     <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/color.css">
 
     <title>Layer Builder</title>
@@ -19,7 +19,6 @@
                 <a ng-show = "!columnsAreDefined" ng-click="selectStructure()" id="btn-edit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">Define Columns</a>
                 <a ng-show = "columnsAreDefined" ng-click="addLayer()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Add layers</a>
                 <a ng-show = "layerIsCreated" ng-click="writeLayerFile()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create Layer File</a>
-
             </div>
         </div>
     </div>

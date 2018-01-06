@@ -8,19 +8,61 @@
                 </div>
                 <div class="modal-body">
                     <form name="layerForm" id ="selectMaterial" class="css-form">
-                        <label>Layer Depth &#181m: <input name="layerDepth" class="form-control" type="number" ng-model="layerDimention.depth" required min="0" /></label><br />
+                        <label>Layer Depth &#181m: </label>
+                        <input name="layerDepth" class="form-control" type="number" ng-model="layerDimention.depth" required min="0" /><br />
                         <span style="color: red" ng-show="layerForm.layerDepth.$dirty && layerForm.layerDepth.$error.required">Layer Depth is Required</span><br />
                         <div ng-repeat="column in columns">
-                            <label>material:
-                                <select class="form-control" ng-init="column.selectedTestMaterial = materialArr[55]" ng-model="column.selectedTestMaterial"
-                                        ng-options="material.name for material in materialArr">
-                                </select><br/>
-                                <button type="button" class="btn btn-default" ng-click="expand()">Show/hide Material Description</button><br/>
+                            <label>material:</label><br/>
+                                <div class="form-group col-sm-6">
+                                    <select class="form-control" ng-init="column.selectedTestMaterial = materialArr[55]" ng-model="column.selectedTestMaterial" ng-options="material.name for material in materialArr"></select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <button type="button" class="btn btn-default" ng-click="expand()">Show/hide Material Description</button>
+                                </div><br/>
                                 <textarea ng-show="column.IsVisible" style="width: 400px; height: 150px" ng-bind="column.selectedTestMaterial.info"></textarea><br/>
-                                <label ng-show=column.selectedTestMaterial.symbol1>{{column.selectedTestMaterial.symbol1}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol1Value" min="0" max="1"/></label><br/>
-                                <label ng-show=column.selectedTestMaterial.symbol2>{{column.selectedTestMaterial.symbol2}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol2Value" min="0" max="1"/></label><br/>
-                                <label ng-show=column.selectedTestMaterial.symbol3>{{column.selectedTestMaterial.symbol3}}:<input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol3Value" min="0" max="1"/></label><br/>
-                            </label>
+
+
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol1>
+                                    <label>grading for variable {{column.selectedTestMaterial.symbol1}}:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol1Value" min="0" max="1"/>
+                                </div>
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol1>
+                                    <label>Grading From:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol1ValueFrom" min="0" max="1"/>
+                                </div>
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol1>
+                                    <label>Grading To:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol1ValueTo" min="0" max="1"/>
+                                </div><br/>
+
+
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol2>
+                                    <label>grading for variable {{column.selectedTestMaterial.symbol2}}:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol2Value" min="0" max="1"/>
+                                </div>
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol2>
+                                    <label>Grading From:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol2ValueFrom" min="0" max="1"/>
+                                </div>
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol2>
+                                    <label>Grading To:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol2ValueTo" min="0" max="1"/>
+                                </div><br/>
+
+
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol3>
+                                    <label>grading for variable {{column.selectedTestMaterial.symbol3}}:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol3Value" min="0" max="1"/><br/>
+                                </div>
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol3>
+                                    <label>Grading From:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol3ValueFrom" min="0" max="1"/><br/>
+                                </div>
+                                <div  class="form-group col-sm-4" ng-show=column.selectedTestMaterial.symbol3>
+                                    <label>Grading To:</label>
+                                    <input class="form-control" type="number" ng-model="column.selectedTestMaterial.symbol3ValueTo" min="0" max="1"/><br/>
+                                </div><br/>
+
                         </div>
                     </form>
                 </div>
