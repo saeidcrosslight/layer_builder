@@ -8,7 +8,7 @@ angular.module('drawingTool.directive', [])
         $scope.radius = {};
         $scope.selectedObjects = [];
         $scope.materialNumber =1;
-        $scope.columns = [{columnNumber:1, IsVisible:false}];
+        $scope.columns = [{columnNumber:1, isMaterialInfoVisible:false}];
         $scope.layers = [];
         $rootScope.layerIsCreated = false;
         var morefile;
@@ -64,7 +64,7 @@ angular.module('drawingTool.directive', [])
             var newColumnNumber = $scope.columns.length+1;
             $scope.columns.push({
                 columnNumber:newColumnNumber,
-                IsVisible:false
+                isMaterialInfoVisible:false
             });
         };
 
@@ -105,17 +105,26 @@ angular.module('drawingTool.directive', [])
                 columns.forEach(function (column) {
                     var columnMaterial = "layer_mater macro_name="+column.selectedTestMaterial.name;
                     var columnNumber = "column_num="+column.columnNumber;
-                    if(column.selectedTestMaterial.symbol1){
+                    if (column.selectedTestMaterial.symbol1 && column.selectedTestMaterial.symbol1ActiveGrading){
+                        var symbol1 = "var_symbol1="+column.selectedTestMaterial.symbol1+" "+"grade_var="+ column.selectedTestMaterial.symbol1Value+" "+ "grade_from="+column.selectedTestMaterial.symbol1ValueFrom+" "+"grade_to="+column.selectedTestMaterial.symbol1ValueTo;
+                    }
+                    else if(column.selectedTestMaterial.symbol1){
                         var symbol1 = "var_symbol1="+column.selectedTestMaterial.symbol1+" "+"var1="+ column.selectedTestMaterial.symbol1Value;
                     }else{
                         symbol1 ="";
                     }
-                    if(column.selectedTestMaterial.symbol2){
+                    if (column.selectedTestMaterial.symbol2 && column.selectedTestMaterial.symbol2ActiveGrading){
+                        var symbol2 = "var_symbol2="+column.selectedTestMaterial.symbol2+" "+"grade_var="+ column.selectedTestMaterial.symbol2Value+" "+ "grade_from="+column.selectedTestMaterial.symbol2ValueFrom+" "+"grade_to="+column.selectedTestMaterial.symbol2ValueTo;
+                    }
+                    else if(column.selectedTestMaterial.symbol2){
                         var symbol2 = "var_symbol2="+column.selectedTestMaterial.symbol2+" "+"var2="+ column.selectedTestMaterial.symbol2Value;
                     }else{
                         symbol2 ="";
                     }
-                    if(column.selectedTestMaterial.symbol3){
+                    if (column.selectedTestMaterial.symbol3 && column.selectedTestMaterial.symbol3ActiveGrading){
+                        var symbol3 = "var_symbol3="+column.selectedTestMaterial.symbol3+" "+"grade_var="+ column.selectedTestMaterial.symbol3Value+" "+ "grade_from="+column.selectedTestMaterial.symbol3ValueFrom+" "+"grade_to="+column.selectedTestMaterial.symbol3ValueTo;
+                    }
+                    else if(column.selectedTestMaterial.symbol3){
                         var symbol3 = "var_symbol3="+column.selectedTestMaterial.symbol3+" "+"var3="+ column.selectedTestMaterial.symbol3Value;
                     }else{
                         symbol3 ="";
@@ -334,7 +343,6 @@ angular.module('drawingTool.directive', [])
             readCrosslightFile();
             var allText = morefile + macfile;
             populateMaterialCombo(allText);
-            console.log($scope.materialArr);
         }
         readCrosslightAndMoreFile();
 
@@ -353,7 +361,7 @@ angular.module('drawingTool.directive', [])
         $scope.expand = function () {
             debugger;
             console.log(this);
-            this.column.IsVisible = this.column.IsVisible ? false : true;
+            this.column.isMaterialInfoVisible = this.column.isMaterialInfoVisible ? false : true;
         }
     }])
 
