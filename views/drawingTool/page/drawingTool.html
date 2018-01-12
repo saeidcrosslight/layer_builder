@@ -15,7 +15,9 @@
                             <label>material:</label><br/>
                                 <div class='row'>
                                     <div class="form-group col-sm-6">
-                                        <select class="form-control" ng-init="column.selectedTestMaterial = materialArr[55]" ng-model="column.selectedTestMaterial" ng-options="material.name for material in materialArr"></select>
+                                        <select class="form-control" ng-model="column.selectedTestMaterial" ng-options="material.name for material in materialArr" ng-change="updateColumnsData($index)" required>
+                                            <option value="">- Please Choose material -</option>
+                                        </select>
                                     </div>
                                     <div class="form-group col-sm-6">
                                         <button type="button" class="btn btn-default" ng-click="expand()">Show/hide Material Description</button>
@@ -29,60 +31,60 @@
                                 <div class='row'>
                                     <div  class="form-group col-sm-3" ng-show="column.selectedTestMaterial.symbol1">
                                         <label>variable {{column.selectedTestMaterial.symbol1}}:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol1" ng-model="column.selectedTestMaterial.symbol1Value" min="0" max="1"/>
+                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol1" ng-model="targetColumns[$index].selectedTestMaterial.symbol1Value" min="0" max="1"/>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show="column.selectedTestMaterial.symbol1">
                                         <label style="padding-top: 25px">
-                                            Activate Grading<input ng-model="column.selectedTestMaterial.symbol1ActiveGrading" ng-init="false" type="checkbox">
+                                            Activate Grading<input ng-model="targetColumns[$index].selectedTestMaterial.symbol1ActiveGrading" ng-init="false" type="checkbox">
                                         </label>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol1>
                                         <label>Grading From:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol1ActiveGrading" ng-disabled="!column.selectedTestMaterial.symbol1ActiveGrading" ng-model="column.selectedTestMaterial.symbol1ValueFrom" min="0" max="1"/>
+                                        <input class="form-control" type="number" ng-required="targetColumns[$index].selectedTestMaterial.symbol1ActiveGrading" ng-disabled="!targetColumns[$index].selectedTestMaterial.symbol1ActiveGrading" ng-model="targetColumns[$index].selectedTestMaterial.symbol1ValueFrom" min="0" max="1"/>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol1>
                                         <label>Grading To:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol1ActiveGrading" ng-disabled="!column.selectedTestMaterial.symbol1ActiveGrading" ng-model="column.selectedTestMaterial.symbol1ValueTo" min="0" max="1"/>
+                                        <input class="form-control" type="number" ng-required="targetColumns[$index].selectedTestMaterial.symbol1ActiveGrading" ng-disabled="!targetColumns[$index].selectedTestMaterial.symbol1ActiveGrading" ng-model="targetColumns[$index].selectedTestMaterial.symbol1ValueTo" min="0" max="1"/>
                                     </div>
                                 </div><br/>
 
                                 <div class='row'>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol2>
                                         <label>variable {{column.selectedTestMaterial.symbol2}}:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol2" ng-model="column.selectedTestMaterial.symbol2Value" min="0" max="1"/>
+                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol2" ng-model="targetColumns[$index].selectedTestMaterial.symbol2Value" min="0" max="1"/>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol2>
                                         <label style="padding-top: 25px">
-                                            Activate Grading<input ng-model="column.selectedTestMaterial.symbol2ActiveGrading" ng-init="false" type="checkbox">
+                                            Activate Grading<input ng-model="targetColumns[$index].selectedTestMaterial.symbol2ActiveGrading" ng-init="false" type="checkbox">
                                         </label>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol2>
                                         <label>Grading From:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol2ActiveGrading" ng-disabled="!column.selectedTestMaterial.symbol2ActiveGrading" ng-model="column.selectedTestMaterial.symbol2ValueFrom" min="0" max="1"/>
+                                        <input class="form-control" type="number" ng-required="targetColumns[$index].selectedTestMaterial.symbol2ActiveGrading" ng-disabled="!targetColumns[$index].selectedTestMaterial.symbol2ActiveGrading" ng-model="targetColumns[$index].selectedTestMaterial.symbol2ValueFrom" min="0" max="1"/>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol2>
                                         <label>Grading To:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol2ActiveGrading" ng-disabled="!column.selectedTestMaterial.symbol2ActiveGrading" ng-model="column.selectedTestMaterial.symbol2ValueTo" min="0" max="1"/>
+                                        <input class="form-control" type="number" ng-required="targetColumns[$index].selectedTestMaterial.symbol2ActiveGrading" ng-disabled="!targetColumns[$index].selectedTestMaterial.symbol2ActiveGrading" ng-model="targetColumns[$index].selectedTestMaterial.symbol2ValueTo" min="0" max="1"/>
                                     </div>
                                 </div><br/>
 
                                 <div class='row'>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol3>
                                         <label>variable {{column.selectedTestMaterial.symbol3}}:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol3" ng-model="column.selectedTestMaterial.symbol3Value" min="0" max="1"/><br/>
+                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol3" ng-model="targetColumns[$index].selectedTestMaterial.symbol3Value" min="0" max="1"/><br/>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol3>
                                         <label style="padding-top: 25px">
-                                            Activate Grading<input ng-model="column.selectedTestMaterial.symbol3ActiveGrading" ng-init="false" type="checkbox">
+                                            Activate Grading<input ng-model="targetColumns[$index].selectedTestMaterial.symbol3ActiveGrading" ng-init="false" type="checkbox">
                                         </label>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol3>
                                         <label>Grading From:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol3ActiveGrading" ng-disabled="!column.selectedTestMaterial.symbol3ActiveGrading" ng-model="column.selectedTestMaterial.symbol3ValueFrom" min="0" max="1"/><br/>
+                                        <input class="form-control" type="number" ng-required="targetColumns[$index].selectedTestMaterial.symbol3ActiveGrading" ng-disabled="!targetColumns[$index].selectedTestMaterial.symbol3ActiveGrading" ng-model="targetColumns[$index].selectedTestMaterial.symbol3ValueFrom" min="0" max="1"/><br/>
                                     </div>
                                     <div  class="form-group col-sm-3" ng-show=column.selectedTestMaterial.symbol3>
                                         <label>Grading To:</label>
-                                        <input class="form-control" type="number" ng-required="column.selectedTestMaterial.symbol3ActiveGrading" ng-disabled="!column.selectedTestMaterial.symbol3ActiveGrading" ng-model="column.selectedTestMaterial.symbol3ValueTo" min="0" max="1"/><br/>
+                                        <input class="form-control" type="number" ng-required="targetColumns[$index].selectedTestMaterial.symbol3ActiveGrading" ng-disabled="!targetColumns[$index].selectedTestMaterial.symbol3ActiveGrading" ng-model="targetColumns[$index].selectedTestMaterial.symbol3ValueTo" min="0" max="1"/><br/>
                                     </div><br/>
                                 </div>
                         </div>

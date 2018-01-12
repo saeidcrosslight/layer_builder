@@ -9,10 +9,16 @@ angular.module('drawingTool.directive', [])
         $scope.selectedObjects = [];
         $scope.materialNumber =1;
         $scope.columns = [{columnNumber:1, isMaterialInfoVisible:false}];
+        $scope.targetColumns = [{columnNumber:1, isMaterialInfoVisible:false}];
         $scope.layers = [];
         $rootScope.layerIsCreated = false;
         var morefile;
         var macfile;
+
+        $scope.updateColumnsData = function(i){
+            debugger;
+            angular.copy($scope.columns[i], $scope.targetColumns[i]);
+        }
 
         $scope.addLayers = function () {
             $('#layerDefinerModal').modal('hide');
@@ -20,7 +26,7 @@ angular.module('drawingTool.directive', [])
             var columns = [];
             debugger;
             angular.copy($scope.layerDimention,layerDimention);
-            angular.copy($scope.columns,columns);
+            angular.copy($scope.targetColumns,columns);
             $scope.layers.push({layerDimention:layerDimention,columns:columns});
             debugger;
             drawLayers();
@@ -66,12 +72,17 @@ angular.module('drawingTool.directive', [])
                 columnNumber:newColumnNumber,
                 isMaterialInfoVisible:false
             });
+            $scope.targetColumns.push({
+                columnNumber:newColumnNumber,
+                isMaterialInfoVisible:false
+            });
         };
 
         $scope.removeColumn = function() {
             var newColumnNumber = $scope.columns.length-1;
             if ( newColumnNumber !== 0 ) {
                 $scope.columns.pop();
+                $scope.targetColumns.pop();
             }
         };
 
@@ -93,7 +104,7 @@ angular.module('drawingTool.directive', [])
 
         formatLayerFile = function () {
             var layerString = "begin_layer"+"\n";
-            $scope.columns.forEach(function (column) {
+            $scope.targetColumns.forEach(function (column) {
                 var columnNumber = "column column_num="+column.columnNumber;
                 var width = " W="+column.width;
                 layerString = layerString + columnNumber + width + "\n";
