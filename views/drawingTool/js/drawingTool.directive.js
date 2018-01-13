@@ -16,7 +16,6 @@ angular.module('drawingTool.directive', [])
         var macfile;
 
         $scope.updateColumnsData = function(i){
-            debugger;
             angular.copy($scope.columns[i], $scope.targetColumns[i]);
         }
 
@@ -24,11 +23,9 @@ angular.module('drawingTool.directive', [])
             $('#layerDefinerModal').modal('hide');
             var layerDimention = {};
             var columns = [];
-            debugger;
             angular.copy($scope.layerDimention,layerDimention);
             angular.copy($scope.targetColumns,columns);
             $scope.layers.push({layerDimention:layerDimention,columns:columns});
-            debugger;
             drawLayers();
             // $("#selectMaterial")[0].reset();
             // angular.forEach($scope.columns, function (column) {
@@ -43,21 +40,45 @@ angular.module('drawingTool.directive', [])
         $scope.previousHieght = 0;
 
         drawLayers = function () {
+            debugger;
             $rootScope.layerIsCreated =true;
             var lastlayer= ($scope.layers.slice(-1)[0]);
             var height = lastlayer.layerDimention.depth;
-            $scope.previousdept= $scope.previousdept+lastlayer.layerDimention.depth;
+            //$scope.previousdept= $scope.previousdept+lastlayer.layerDimention.depth;
             var columns = lastlayer.columns;
             var left =200;
             angular.forEach(columns, function (column, key) {
                 var rect = new fabric.Rect({
                     left:left,
+                    lockMovementX: true,
+                    lockMovementY: true,
+                    lockRotation: true,
+                    lockScalingX: true,
+                    lockScalingY: true,
                     top: 650-$scope.previousHieght-height,
                     fill: column.selectedTestMaterial.color,
                     width: column.width,
                     height: height,
                     stroke: 'black',
                     strokeWidth: .5,
+                    columnInfo:{
+                        columnNumber: column.columnNumber,
+                        columnWidth: column.width,
+                        materialName: column.selectedTestMaterial.name,
+                        materialInfo: column.selectedTestMaterial.info,
+                        symbol1: column.selectedTestMaterial.symbol1,
+                        symbol1Value: column.selectedTestMaterial.symbol1Value,
+                        symbol1ValueFrom: column.selectedTestMaterial.symbol1ValueFrom,
+                        symbol1ValueTo: column.selectedTestMaterial.symbol1ValueTo,
+                        symbol2: column.selectedTestMaterial.symbol2,
+                        symbol2Value: column.selectedTestMaterial.symbol2Value,
+                        symbol2ValueFrom: column.selectedTestMaterial.symbol2ValueFrom,
+                        symbol2ValueTo: column.selectedTestMaterial.symbol2ValueTo,
+                        symbol3: column.selectedTestMaterial.symbol3,
+                        symbol3Value: column.selectedTestMaterial.symbol3Value,
+                        symbol3ValueFrom: column.selectedTestMaterial.symbol3ValueFrom,
+                        symbol3ValueTo: column.selectedTestMaterial.symbol3ValueTo,
+                    }
                 });
 
                 selectedcanvasWindow.add(rect);
@@ -191,31 +212,60 @@ angular.module('drawingTool.directive', [])
                     obj.left = Math.min(obj.left, obj.canvas.width-obj.getBoundingRect().width+obj.left-obj.getBoundingRect().left);
                 }
             });
-            selectedcanvasWindow.on('object:modified', function(options) {
-                if (options.target && options.target.type == "rect") {
-                    $scope.rectCenterPointX = (options.target.getCenterPoint().x/10).toFixed(2);
-                    $scope.rectCenterPointY = (options.target.getCenterPoint().y/10).toFixed(2);
-                    $scope.firstRectCoordinateX = (options.target.getCoords()[0].x/10).toFixed(2);
-                    $scope.firstRectCoordinateY = (options.target.getCoords()[0].y/10).toFixed(2);
-                    $scope.secondRectCoordinateX = (options.target.getCoords()[1].x/10).toFixed(2);
-                    $scope.secondRectCoordinateY = (options.target.getCoords()[1].y/10).toFixed(2);
-                    $scope.thirdRectCoordinateX = (options.target.getCoords()[2].x/10).toFixed(2);
-                    $scope.thirdRectCoordinateY = (options.target.getCoords()[2].y/10).toFixed(2);
-                    $scope.forthRectCoordinateX = (options.target.getCoords()[3].x/10).toFixed(2);
-                    $scope.forthRectCoordinateY = (options.target.getCoords()[3].y/10).toFixed(2);
+
+            // selectedcanvasWindow.on('object:modified', function(options) {
+            //     if (options.target && options.target.type == "rect") {
+            //         $scope.rectCenterPointX = (options.target.getCenterPoint().x/10).toFixed(2);
+            //         $scope.rectCenterPointY = (options.target.getCenterPoint().y/10).toFixed(2);
+            //         $scope.firstRectCoordinateX = (options.target.getCoords()[0].x/10).toFixed(2);
+            //         $scope.firstRectCoordinateY = (options.target.getCoords()[0].y/10).toFixed(2);
+            //         $scope.secondRectCoordinateX = (options.target.getCoords()[1].x/10).toFixed(2);
+            //         $scope.secondRectCoordinateY = (options.target.getCoords()[1].y/10).toFixed(2);
+            //         $scope.thirdRectCoordinateX = (options.target.getCoords()[2].x/10).toFixed(2);
+            //         $scope.thirdRectCoordinateY = (options.target.getCoords()[2].y/10).toFixed(2);
+            //         $scope.forthRectCoordinateX = (options.target.getCoords()[3].x/10).toFixed(2);
+            //         $scope.forthRectCoordinateY = (options.target.getCoords()[3].y/10).toFixed(2);
+            //         $timeout (function () {
+            //             $('#rectangularCoordinateModal').modal('show');
+            //             $('.modal-backdrop').removeClass("modal-backdrop");
+            //             $("#rectangularCoordinateModal").draggable({
+            //                 handle: ".modal-header"
+            //             });
+            //         }, 0)
+            //     }
+            // });
+
+            selectedcanvasWindow.on('mouse:dblclick', function(object) {
+                if(object.target && object.target.columnInfo) {
+                    console.log(object.target.columnInfo);
+                    $scope.clickedMaterial = object.target.columnInfo;
+
                     $timeout (function () {
-                        $('#rectangularCoordinateModal').modal('show');
+                        $('#materialInfoModal').modal('show');
                         $('.modal-backdrop').removeClass("modal-backdrop");
-                        $("#rectangularCoordinateModal").draggable({
+                        $("#materialInfoModal").draggable({
                             handle: ".modal-header"
                         });
                     }, 0)
                 }
             });
 
-            selectedcanvasWindow.on('object:added', function(options) {
-                console.log(options.target.type);
+            selectedcanvasWindow.on('mouse:over', function(object) {
+                if(object.target && object.target.columnInfo) {
+                    console.log(object.target.columnInfo);
+                    console.log("In");
+                }
             });
+
+            selectedcanvasWindow.on('mouse:out', function(object) {
+                if(object.target && object.target.columnInfo) {
+                    console.log(object.target.columnInfo);
+                    console.log("out");
+                }
+            });
+
+
+
         };
 
         addGrid = function () {

@@ -155,5 +155,33 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade bd-example-modal-sm" id="materialInfoModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Maretial Information</h4>
+                </div>
+                <div class="modal-body">
+                    <b>Column Number: </b> {{clickedMaterial.columnNumber}}<br/>
+                    <b>Column Width: </b>{{clickedMaterial.columnWidth}}<br/>
+                    <b>Material Name: </b>{{clickedMaterial.materialName}}<br/>
+                    <b ng-show="clickedMaterial.symbol1">{{clickedMaterial.symbol1}}: {{clickedMaterial.symbol1Value}}<br/></b>
+                    <b ng-show="clickedMaterial.symbol1ValueFrom">From: {{clickedMaterial.symbol1ValueFrom}} To: {{clickedMaterial.symbol1ValueTo}}<br/></b>
+                    <b ng-show="clickedMaterial.symbol2">{{clickedMaterial.symbol2}}: {{clickedMaterial.symbol2Value}}<br/></b>
+                    <b ng-show="clickedMaterial.symbol2ValueFrom">From: {{clickedMaterial.symbol2ValueFrom}} To: {{clickedMaterial.symbol2ValueTo}}<br/></b>
+                    <b ng-show="clickedMaterial.symbol3">{{clickedMaterial.symbol3}}: {{clickedMaterial.symbol3Value}}<br/></b>
+                    <b ng-show="clickedMaterial.symbol3ValueFrom">From: {{clickedMaterial.symbol3ValueFrom}} To: {{clickedMaterial.symbol3ValueTo}}<br/></b>
+
+                    <!--<b>{{clickedMaterial.symbol1}} </b>{{clickedMaterial.symbol1Value}}<br/>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--<input ng-disabled="!canvasIsAdded" type="submit" value="Add Grid" ng-click="addGrid()"/>-->
 </div>
