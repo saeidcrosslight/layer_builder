@@ -2,7 +2,7 @@ angular
         .module('message.directive',[])
 
         .controller('messageTabContrller', ['$scope', function($scope) {
-           $scope.name = "Saeid";
+           $scope.name = "CrossLight";
         }])
 
         .directive('messageTab', function () {
@@ -10,5 +10,4 @@ angular
                 restrict: "E",
                 templateUrl: "./views/messages/page/message.html"
             };
-
         });
