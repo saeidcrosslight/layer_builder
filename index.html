@@ -1,45 +1,48 @@
 <!doctype html>
 <html lang="en" ng-app="CrosslightApp">
-<head>
-    <link rel="stylesheet" href="./src/angular-ui-tree/angular-ui-tree.min.css">
-    <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="./src/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./src/style/style.css">
-    <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/color.css">
+    <head>
+        <link rel="stylesheet" href="./src/angular-ui-tree/angular-ui-tree.min.css">
+        <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="./src/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./src/style/style.css">
+        <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/color.css">
 
-    <title>Layer Builder</title>
-</head>
-<!-- The ng-app directive -->
-<body class="easyui-layout">
-    <div data-options="region:'north',title:'Layer Builder',split:true, collapsible:false" style="height:62px; z-index: 1;">
-        <!--<header-menu ng-controller="DrawingToolController"/>-->
-        <div ng-controller="DrawingToolController">
-            <div class="easyui-panel" style="padding:5px;">
-                <a ng-show = "!columnsAreDefined" ng-click="selectStructure()" id="btn-edit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">Define Columns</a>
-                <a ng-show = "columnsAreDefined" ng-click="addLayer()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Add layers</a>
-                <a ng-show = "layerIsCreated" ng-click="writeLayerFile()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create Layer File</a>
+        <title>Layer Builder</title>
+    </head>
+    <!-- The ng-app directive -->
+    <body class="easyui-layout">
+        <div data-options="region:'north',title:'Layer Builder',split:true, collapsible:false" style="height:62px; z-index: 1;">
+            <!--<header-menu ng-controller="DrawingToolController"/>-->
+            <div ng-controller="DrawingToolController">
+                <div class="easyui-panel" style="padding:5px;">
+                    <a ng-show = "!columnsAreDefined" ng-click="selectStructure()" id="btn-edit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">Define Columns</a>
+                    <a ng-show = "columnsAreDefined" ng-click="addLayer()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Add layers</a>
+                    <a ng-show = "layerIsCreated" ng-click="writeLayerFile()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create Layer File</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div data-options="region:'south',title:'Output Message',split:true,collapsed:true" style="height:300px;"></div>
-    <div data-options="region:'east',title:'East',split:true,collapsed:true" style="width:100px;"></div>
-    <div data-options="region:'west',title:'File Tree',split:true,collapsed:true" style="width:200px;">
-    <my-customer ng-controller="Controller"/>
-    </div>
-    <div data-options="region:'center',title:'Structure Editor'" style="padding:5px;background:#eee;">
-        <drawing-tool ng-controller="DrawingToolController"></drawing-tool>
-    </div>
-<script type="text/javascript" src="./src/angular/angular.min.js"></script>
-<script type="text/javascript" src="./src/angular-ui-tree/angular-ui-tree.min.js"></script>
-<script type="text/javascript" src="./src/fabric/fabric.js"></script>
-<script type="text/javascript" src="./src/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="./src/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
-<script src="./src/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./js/app.js"></script>
-<script type="text/javascript" src="./views/filetree/js/filetree.directive.js"></script>
-<script type="text/javascript" src="./views/drawingTool/js/drawingTool.directive.js"></script>
-    <script type="text/javascript" src="./js/nodejs.js"></script>
-</body>
+        <div data-options="region:'south',title:'Output Message',split:true,collapsed:false" style="height:300px;">
+            <message-tab ng-controller="messageTabContrller"></message-tab>
+        </div>
+        <div data-options="region:'east',title:'East',split:true,collapsed:true" style="width:100px;"></div>
+        <div data-options="region:'west',title:'File Tree',split:true,collapsed:true" style="width:200px;">
+        <my-customer ng-controller="Controller"/>
+        </div>
+        <div data-options="region:'center',title:'Structure Editor'" style="padding:5px;background:#eee;">
+            <drawing-tool ng-controller="DrawingToolController"></drawing-tool>
+        </div>
+        <script type="text/javascript" src="./src/angular/angular.min.js"></script>
+        <script type="text/javascript" src="./src/angular-ui-tree/angular-ui-tree.min.js"></script>
+        <script type="text/javascript" src="./src/fabric/fabric.js"></script>
+        <script type="text/javascript" src="./src/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="./src/jquery-easyui-1.5.3/jquery.easyui.min.js"></script>
+        <script src="./src/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./js/app.js"></script>
+        <script type="text/javascript" src="./views/filetree/js/filetree.directive.js"></script>
+        <script type="text/javascript" src="./views/drawingTool/js/drawingTool.directive.js"></script>
+        <script type="text/javascript" src="./views/messages/js/message.directive.js"></script>
+        <script type="text/javascript" src="./js/nodejs.js"></script>
+    </body>
 </html>
 
