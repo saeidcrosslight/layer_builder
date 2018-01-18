@@ -1,0 +1,9 @@
+<div ng-controller="rightClickController">
+    <a id="rightclick" style="display:none" data-toggle="dropdown"></a>
+    <ul id="rightclickmenu" class="dropdown-menu" role="menu">
+        <li ng-repeat="menu in simucenter.rightClickMenu.menuList"><!-- filetree right click -->
+            <a href='#' ng-if="menu.useable" ng-mousedown="rightClickEvent(menu.id, menu.fileName, menu.filePath, menu.treeType)">{{menu.name}}</a>
+            <a href='#' ng-if="!menu.useable" class="rightmenugray">{{menu.name}}</a>
+        </li>
+    </ul>
+</div>
