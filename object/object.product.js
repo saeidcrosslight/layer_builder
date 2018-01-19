@@ -774,7 +774,7 @@ angular
                             var sb = new String();
                             sb = projectPath.split("\\")[0] + "\r\n";
                             sb += "cd \"" + projectPath + "\"\r\n";
-                            sb += "\"" + app.appPath + appName + "\" " + fileName;
+                            sb += "\"" + "C:\\NovaTCAD\\Apsy" + appName + "\" " + fileName;
                             file.writeallsync(projectPath + "\\temp.bat", sb);//temp.bat
                         };
 
