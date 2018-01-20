@@ -22,12 +22,7 @@ angular
 
                     layer = "\\layer.exe"
 
-                    var product = $.extend({}, product.createProductObject(), {
-                        productName: 'Apsys',
-                        title : 'Welcome to SimuCenter - SimuApsys',
-                        appPathName: 'ApsysPath',
-                        wizardPropertyList: []
-                    })
+                    var product = $rootScope.product;
                     //var eid = product.editors.getCurrentEditorObject(product).editorID;
                     var gui = require('nw.gui'),
                         clipboard = gui.Clipboard.get();

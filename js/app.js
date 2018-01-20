@@ -7,4 +7,13 @@ angular
         'object.autotcad', 'object.messages', 'object.filetree',
         'object.editor', 'object.rightclickmenu', 'object.wizard', 'object.validator', 'object.networks',
         'object.product'])
+    .run(function ($rootScope, product) {
+        $rootScope.product = $.extend({}, product.createProductObject(), {
+            productName: 'Apsys',
+            title : 'Welcome to SimuCenter - SimuApsys',
+            appPathName: 'ApsysPath',
+            wizardPropertyList: []
+        })
+
+    })
 
