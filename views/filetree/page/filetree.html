@@ -14,8 +14,8 @@
         </ol>
     </script>
     <div ui-tree id="tree-root">
-        <ol ui-tree-nodes="" ng-model="data">
-            <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+        <ol ui-tree-nodes="" ng-model="product.filetree.inputfiles">
+            <li ng-repeat="node in product.filetree.inputfiles" ui-tree-node ng-include="'nodes_renderer.html'"></li>
         </ol>
     </div>
 </div>

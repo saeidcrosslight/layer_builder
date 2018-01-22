@@ -4,7 +4,7 @@
 
 angular.module('filetree.directive', [])
 
-    .controller('Controller', ['$scope', function($scope) {
+    .controller('Controller', ['$rootScope','$scope', function($rootScope, $scope) {
         $scope.data = [{
             "id": 1,
             "title": "folder1",

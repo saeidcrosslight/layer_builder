@@ -1,0 +1,14 @@
+[
+    {
+        "name": "New",
+        "class": "glyphicon glyphicon-file",
+        "disabled": "",
+        "title": "New project"
+    },
+    {
+        "name": "Open",
+        "class": "glyphicon glyphicon-folder-open",
+        "disabled": "",
+        "title": "Open existing project"
+    }
+]

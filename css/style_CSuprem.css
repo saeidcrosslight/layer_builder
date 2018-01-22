@@ -1,0 +1,4 @@
+
+.tabbar{ clear: left; border-bottom:2px solid #99CCFF; margin-top:2px }
+.navbackground{ background:#99CCFF }
+.panel-header,.panel-body{ border:1px solid #99CCFF }/*可拖拉边框的颜色*/

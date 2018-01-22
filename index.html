@@ -13,15 +13,21 @@
     <!-- The ng-app directive -->
     <body class="easyui-layout">
         <div data-options="region:'north',title:'Layer Builder',split:true, collapsible:false" style="height:62px; z-index: 1;">
+
             <!--<header-menu ng-controller="DrawingToolController"/>-->
+          <!--  <div layerbuilderheader></div>-->
             <div ng-controller="DrawingToolController">
+
                 <div class="easyui-panel" style="padding:5px;">
-                    <a ng-show = "!columnsAreDefined" ng-click="selectStructure()" id="btn-edit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">Define Columns</a>
+
+                    <a ng-show = "!columnsAreDefined" ng-click="selectStructure()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">Define Columns</a>
                     <a ng-show = "columnsAreDefined" ng-click="addLayer()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Add layers</a>
                     <a ng-show = "layerIsCreated" ng-click="writeLayerFile()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create Layer File</a>
                     <a ng-controller="rightClickController" ng-click="rightClickEvent()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create geo File</a>
                 </div>
+
             </div>
+            <layerbuilderheader/>
         </div>
         <div data-options="region:'south',title:'Output Message',split:true,collapsed:false" style="height:300px;">
             <message-tab ng-controller="messageTabContrller"></message-tab>
@@ -47,9 +53,13 @@
         <script type="text/javascript" src="./object/object.network.js"></script>
         <script type="text/javascript" src="./object/object.product.js"></script>
         <script type="text/javascript" src="./object/object.rightclickmenu.js"></script>
+        <script type="text/javascript" src="./views/header/js/header.directive.js"></script>
+        <script type="text/javascript" src="./views/header/js/navigation.controller.js"></script>
+        <script type="text/javascript" src="./views/header/js/quick.controller.js"></script>
         <script type="text/javascript" src="./object/object.validator.js"></script>
         <script type="text/javascript" src="./object/object.wizard.js"></script>
         <script type="text/javascript" src="./views/filetree/js/filetree.directive.js"></script>
+
         <script type="text/javascript" src="./views/drawingTool/js/drawingTool.directive.js"></script>
         <script type="text/javascript" src="./views/messages/js/message.directive.js"></script>
         <script type="text/javascript" src="./views/rightclickmenu/rightclickmenu.js"></script>

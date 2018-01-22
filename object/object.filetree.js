@@ -154,9 +154,9 @@ angular
                         },
                         createApsysInputFileTree = function (files, treeFolder, path) {
                             var solnum = 0;
-                            var appPath = $rootScope.simucenter.Apsys.appPath;
-                            if ($rootScope.simucenter.Pics3d.isCurrentApp)
-                                appPath = $rootScope.simucenter.Pics3d.appPath;
+                            debugger;
+                            var appPath = "C:\\NovaTCAD\\Apsys";
+
                             angular.forEach(MACRO_FILE_APSYS, function (data, index) {
                                 treeFolder.nodes[0].nodes.push(addTreeNode(index + 1, data.title, appPath, "sysfile", "inputfile"));
                             });
@@ -304,23 +304,23 @@ angular
                         createAllFileTree = function (productFiletree, projectPath) {
                             var files = file.readfoldersync(projectPath);
                             //If currentApp is CSuprem and project is running, Or currentApp is CSuprem and CSuprem is not init, then all first method. Other situation call second
-                            if (($rootScope.simucenter.CSuprem.isProjectRun && $rootScope.simucenter.CSuprem.isCurrentApp) || $rootScope.simucenter.CSuprem.isCurrentApp)
+                           /* if (($rootScope.simucenter.CSuprem.isProjectRun && $rootScope.simucenter.CSuprem.isCurrentApp) || $rootScope.simucenter.CSuprem.isCurrentApp)
                                 //临时的解决方案，如果产品之间同时切换并运行会出错，单独运行一个产品再切换可以
                                 createCsupremInputFileTree(files, productFiletree.inputfiles[0], projectPath);
-                            else
+                            else*/
                                 createApsysInputFileTree(files, productFiletree.inputfiles[0], projectPath);
 
-                            createOutputFileTree(files, productFiletree.outputfiles[0], projectPath);
+                            //createOutputFileTree(files, productFiletree.outputfiles[0], projectPath);
                             //files = file.readfoldersync(projectPath + "\\Projects");
                             //creatSeriesFileTree(files, productFiletree.seriesfiles[0], projectPath + "\\Projects");      
                         },
                         createInputOutputFileTree = function(productFiletree, projectPath){
                             var files = file.readfoldersync(projectPath);                            
-                            if (($rootScope.simucenter.CSuprem.isProjectRun && $rootScope.simucenter.CSuprem.isCurrentApp) || $rootScope.simucenter.CSuprem.isCurrentApp)                                
+                            /*if (($rootScope.simucenter.CSuprem.isProjectRun && $rootScope.simucenter.CSuprem.isCurrentApp) || $rootScope.simucenter.CSuprem.isCurrentApp)
                                 createCsupremInputFileTree(files, productFiletree.inputfiles[0], projectPath);
-                            else
-                                createApsysInputFileTree(files, productFiletree.inputfiles[0], projectPath);
-                            createOutputFileTree(files, productFiletree.outputfiles[0], projectPath);
+                            else*/
+                            createApsysInputFileTree(files, productFiletree.inputfiles[0], projectPath);
+                           // createOutputFileTree(files, productFiletree.outputfiles[0], projectPath);
                         },
                         resetAllFileTree = function (filetree) {
                             resetInputFileTree(filetree);

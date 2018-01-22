@@ -1,14 +1,18 @@
 angular
-        .module('rightclickmenu.event', [])
-        .directive('rightclickmenu', function () {
-            return {
-                replace: true,
-                restrict: 'EA',
-                templateUrl: 'views/rightclickmenu/rightclickmenu.html'
-            };
-        })
-
+        .module('rightclickmenu', [])
+        // .directive('rightclickmenu', function () {
+        //     return {
+        //         replace: true,
+        //         restrict: 'EA',
+        //         templateUrl: 'views/rightclickmenu/rightclickmenu.html'
+        //     };
+        // })
         .controller('rightClickController', ['product','$rootScope', '$scope', 'file', function ( product,$rootScope, $scope, file) {
+            debugger;
+
+
+            console.log(product);
+
                 // *****************************
                 $scope.rightClickEvent = function ( ) {
                     debugger;
@@ -21,7 +25,8 @@ angular
                     subpath = "\\apsys";
 
                     layer = "\\layer.exe"
-
+                    //var product =  product.createProductObject();
+                    //var product = product.createBatFileToRun();
                     var product = $rootScope.product;
                     //var eid = product.editors.getCurrentEditorObject(product).editorID;
                     var gui = require('nw.gui'),

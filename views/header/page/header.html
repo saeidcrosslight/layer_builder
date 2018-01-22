@@ -1,0 +1,26 @@
+<div>
+    <div class="collapse navbar-collapse navbackground" id="bs-example-navbar-collapse-1" ng-controller="navigationController">
+      <!--  <ul class="nav navbar-nav" style="position:fixed;z-index:100">
+            <li class='dropdown' ng-repeat="nav in product.navigations">
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>{{nav.name}}</a>
+                <ul ng-model="nav.menus" class='dropdown-menu' role='menu'>
+                    <li ng-repeat="subnav in nav.menus" ng-class="{'divider':subnav.name==='divider'}">
+                        <a href='#' id="" ng-click="apsysNavigationEvent($parent.$index,$index,subnav.path)" ng-class="{'useable':!subnav.useable}">
+                            {{subnav.name}}<span ng-if="subnav.shortcut" style='float:right'>{{subnav.shortcut}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>-->
+    </div>
+    <div class="quickbar Apsys" ng-controller="quickBarController">
+        <button ng-repeat="quickbar in product.quickMenus" title="{{quickbar.title}}" class="{{quickbar.disabled}}" ng-click="quickEvent($index,quickbar.disabled)">
+            <i ng-if="$index < 8 || $index>14" style="font-size: 28px!important" class="{{quickbar.class}}"></i>
+            <img ng-if="$index > 7 && $index<15" ng-src="images/Apsys_quick/{{quickbar.name}}.png" style="margin:3px 0" />
+            <br>{{quickbar.name}}
+        </button>
+
+    </div>
+    <input id="fileDialog" onchange="openProject()" class='file' type="file" accept=".sol" />
+    <!--<input id="newFile_Apsys" onchange="openFile()" class='file' type="file" ng-controller="quickBarController"/>-->
+</div>

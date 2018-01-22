@@ -1,0 +1,440 @@
+[
+    {
+        "id": "menu-1",
+        "name": "File",
+        "menus": [
+            {
+                "id": "m1-1",
+                "name": "New",
+                "shortcut": "Ctrl+N",
+                "useable": true
+            },
+            {
+                "id": "m1-2",
+                "name": "Open...",
+                "shortcut": "Ctrl+O",
+                "useable": true
+            },
+            {
+                "id": "m1-3",
+                "name": "Import",
+                "useable": false
+            },
+            {
+                "id": "m1-4",
+                "name": "Import macro",
+                "useable": false
+            },
+            {
+                "id": "m1-5",
+                "name": "New Project",
+                "useable": true
+            },
+            {
+                "id": "m1-6",
+                "name": "Open Project",
+                "useable": true
+            },
+            {
+                "id": "m1-7",
+                "name": "Close Project",
+                "useable": true
+            },
+            {
+                "id": "m1-8",
+                "name": "Save Project",
+                "useable": true
+            },
+            {
+                "id": "m1-9",
+                "name": "Close",
+                "shortcut": "Ctrl+W",
+                "useable": true
+            },
+            {
+                "id": "m1-10",
+                "name": "Save",
+                "shortcut": "Ctrl+S",
+                "useable": true
+            },
+            {
+                "id": "m1-11",
+                "name": "Save As...",
+                "useable": false
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m1-12",
+                "name": "Print...",
+                "shortcut": "Ctrl+P",
+                "useable": false
+            },
+            {
+                "id": "m1-13",
+                "name": "Print Preview",
+                "useable": false
+            },
+            {
+                "id": "m1-14",
+                "name": "Print Setup...",
+                "useable": false
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m1-15",
+                "name": "Recent Files",
+                "menus": [
+                ],
+                "useable": true
+            },
+            {
+                "id": "m1-16",
+                "name": "Recent Projects",
+                "menus": [
+                ],
+                "useable": false
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m1-17",
+                "name": "Exit",
+                "useable": true
+            }
+        ]
+    },
+    {
+        "id": "menu-2",
+        "name": "Edit",
+        "menus": [
+            {
+                "id": "m2-1",
+                "name": "Undo",
+                "shortcut": "Ctrl+Z",
+                "useable": false
+            },
+            {
+                "id": "m2-2",
+                "name": "Redo",
+                "shortcut": "Ctrl+Y",
+                "useable": false
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m2-3",
+                "name": "Cut",
+                "shortcut": "Ctrl+X",
+                "useable": false
+            },
+            {
+                "id": "m2-4",
+                "name": "Copy",
+                "shortcut": "Ctrl+C",
+                "useable": false
+            },
+            {
+                "id": "m2-5",
+                "name": "Paste",
+                "shortcut": "Ctrl+V",
+                "useable": false
+            },
+            {
+                "id": "m2-6",
+                "name": "Delete",
+                "shortcut": "Delete",
+                "useable": true
+            },
+            {
+                "id": "m2-7",
+                "name": "Select All",
+                "shortcut": "Ctrl+A",
+                "useable": true
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m2-8",
+                "name": "Find...",
+                "shortcut": "Ctrl+F",
+                "useable": true
+            },
+            {
+                "id": "m2-9",
+                "name": "Find Next",
+                "shortcut": "F3",
+                "useable": true
+            },
+            {
+                "id": "m2-10",
+                "name": "Find Previous",
+                "shortcut": "Shift+F3",
+                "useable": true
+            },
+            {
+                "id": "m2-11",
+                "name": "Replace...",
+                "shortcut": "Ctrl+H",
+                "useable": true
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m2-12",
+                "name": "Comment Text",
+                "shortcut": "Ctrl+K",
+                "useable": true
+            },
+            {
+                "id": "m2-13",
+                "name": "Remove Comments",
+                "shortcut": "Ctrl+R",
+                "useable": true
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m2-14",
+                "name": "Preference",
+                "shortcut": "Ctrl+B",
+                "useable": true
+            }
+        ]
+    },
+    {
+        "id": "menu-3",
+        "name": "View",
+        "menus": [
+            {
+                "id": "m3-1",
+                "name": "Start Page",
+                "useable": true
+            }
+        ]
+    },
+    {
+        "id": "menu-4",
+        "name": "Options",
+        "menus": [
+            {
+                "id": "m4-1",
+                "name": "Auto Save Log File",
+                "useable": false
+            }
+        ]
+    },
+    {
+        "id": "menu-5",
+        "name": "Examples",
+        "menus": [
+            {
+                "id": "m5-1",
+                "name": "Open example",
+                "useable": true
+            }
+        ]
+    },
+    {
+        "id": "menu-6",
+        "name": "Help",
+        "menus": [
+            {
+                "id": "m6-1",
+                "name": "About Workbench...",
+                "useable": true
+            },
+            {
+                "name": "divider"
+            },
+            {
+                "id": "m6-2",
+                "name": "Tutorial Movies",
+                "path": "",
+                "useable": true
+            },
+            {
+                "id": "m6-3",
+                "name": "General Manual",
+                "path": "\\GUI\\PDF\\common\\manual.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-4",
+                "name": "General Manual(HTML)",
+                "path": "\\GUI\\HTML\\general\\manual.html",
+                "useable": true
+            },
+            {
+                "id": "m6-5",
+                "name": "Appl. Guide: 3D Simulation",
+                "path": "\\GUI\\PDF\\apsys\\app_3d_flow.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-6",
+                "name": "Appl. Guide: Basic Silicon",
+                "path": "\\GUI\\PDF\\apsys\\app_basic_silicon.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-7",
+                "name": "Appl. Guide: HBT",
+                "path": "\\GUI\\PDF\\apsys\\app_HBT.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-8",
+                "name": "Appl. Guide: HEMT",
+                "path": "\\GUI\\PDF\\apsys\\app_HEMT.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-8-2",
+                "name": "Appl. Guide: LED Express",
+                "path": "\\GUI\\PDF\\apsys\\app_LED.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-9",
+                "name": "Appl. Guide: Multi-junction Solar Cell",
+                "path": "\\GUI\\PDF\\apsys\\Crosslight_mj_cell_ag.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-10",
+                "name": "Appl. Guide: QE simulation of Subcells with TJ Solar cells",
+                "path": "\\GUI\\PDF\\apsys\\crosslight_getting_QE.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-11",
+                "name": "Appl. Guide: APD Simulation",
+                "path": "\\GUI\\PDF\\apsys\\Crosslight_APSYS_APD_ag.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-12",
+                "name": "Appl. Guide: RCLED Simulation",
+                "path": "\\GUI\\PDF\\apsys\\crosslight_rcled_ag.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-13",
+                "name": "Appl. Guide: OLED Simulation",
+                "path": "\\GUI\\PDF\\apsys\\crosslight_oled_ag.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-14",
+                "name": "Appl. Guide: Other Types of Simulations",
+                "path": "\\GUI\\PDF\\apsys\\app_misc.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-15",
+                "name": "Appl. Guide: Photosensitive Devices",
+                "path": "\\GUI\\PDF\\apsys\\app_photo-sensitive.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-16",
+                "name": "Appl. Guide: Quantum MOS Simulation",
+                "path": "\\GUI\\PDF\\apsys\\app_quantum_MOS.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-17",
+                "name": "Appl. Guide: Ray Tracing(LED/PD)",
+                "path": "\\GUI\\PDF\\apsys\\app_ray_tracing.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-18",
+                "name": "Appl. Guide: MM-HEMT",
+                "path": "\\GUI\\PDF\\apsys\\Crosslight_MM_HEMT.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-19",
+                "name": "Appl. Guide: Quantum Dots",
+                "path": "\\GUI\\PDF\\common\\crosslight_qdot_ag.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-20",
+                "name": "Appl. Guide: Quantum Dot LEDs",
+                "path": "\\GUI\\PDF\\apsys\\crosslight_qdotled_ag.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-21",
+                "name": "Appl. Guide: Surrounding Gate MOS",
+                "path": "\\GUI\\PDF\\apsys\\sgt.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-22",
+                "name": "Tutorial Workbook",
+                "path": "\\GUI\\PDF\\common\\Workbook03.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-23",
+                "name": "Common Questions and Answers",
+                "path": "\\GUI\\PDF\\common\\Common_QAs.pdf",
+                "useable": true
+            },
+            {
+                "id": "m6-24",
+                "name": "GUI: SimuCenter User's Guide",
+                "path": "\\GUI\\HTML\\SCUserManual\\SIMUCENTER.html",
+                "useable": true
+            },
+            {
+                "id": "m6-25",
+                "name": "GUI: LayerBuilder User's Guide",
+                "path": "\\GUI\\HTML\\LBUserManual\\LayerBuilder.html",
+                "useable": true
+            },
+            {
+                "id": "m6-26",
+                "name": "GUI: Layer3d User's Guide",
+                "path": "\\GUI\\HTML\\L3DUserManual\\Layer3d.html",
+                "useable": true
+            },
+            {
+                "id": "m6-27",
+                "name": "GUI: GeoEditor User's Guide",
+                "path": "\\GUI\\HTML\\GEUserManual\\GeoEditor.html",
+                "useable": true
+            },
+            {
+                "id": "m6-28",
+                "name": "GUI: CrosslightView User's Guide",
+                "path": "\\GUI\\HTML\\CVUserManual\\Crosslightview.html",
+                "useable": true
+            },
+            {
+                "id": "m6-29",
+                "name": "GUI: On Simulation Series",
+                "path": "\\GUI\\PDF\\common\\SimulationSeriesDoc.PDF",
+                "useable": true
+            },
+            {
+                "id": "m6-30",
+                "name": "GUI: GeoEditor Series",
+                "path": "\\GUI\\PDF\\common\\GeoEditor-Series.PDF",
+                "useable": true
+            }
+        ]
+    }
+]
