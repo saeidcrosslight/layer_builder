@@ -7,27 +7,31 @@
         <link rel="stylesheet" type="text/css" href="./src/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./src/style/style.css">
         <link rel="stylesheet" type="text/css" href="./src/jquery-easyui-1.5.3/themes/color.css">
-
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/style_Apsys.css" rel="stylesheet">
         <title>Layer Builder</title>
     </head>
     <!-- The ng-app directive -->
     <body class="easyui-layout">
-        <div data-options="region:'north',title:'Layer Builder',split:true, collapsible:false" style="height:62px; z-index: 1;">
+        <div data-options="region:'north',title:'Layer Builder',split:false, collapsible:false" style="height:180px;">
+            <div class="easyui-layout" data-options="fit:true">
+                <div data-options="region:'north'" style="height:120px;">
+                    <layerbuilderheader/>
+                </div>
+                <div data-options="region:'south'" style="height:45px">
+                        <div ng-controller="DrawingToolController" style="padding:5px;">
+                            <a ng-show = "!columnsAreDefined" ng-click="selectStructure()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">Define Columns</a>
+                            <a ng-show = "columnsAreDefined" ng-click="addLayer()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Add layers</a>
+                            <a ng-show = "layerIsCreated" ng-click="writeLayerFile()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create Layer File</a>
+                            <a ng-controller="rightClickController" ng-click="rightClickEvent()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create geo File</a>
+                        </div>
+                </div>
+            </div>
 
             <!--<header-menu ng-controller="DrawingToolController"/>-->
           <!--  <div layerbuilderheader></div>-->
-            <div ng-controller="DrawingToolController">
 
-                <div class="easyui-panel" style="padding:5px;">
 
-                    <a ng-show = "!columnsAreDefined" ng-click="selectStructure()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">Define Columns</a>
-                    <a ng-show = "columnsAreDefined" ng-click="addLayer()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Add layers</a>
-                    <a ng-show = "layerIsCreated" ng-click="writeLayerFile()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create Layer File</a>
-                    <a ng-controller="rightClickController" ng-click="rightClickEvent()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">Create geo File</a>
-                </div>
-
-            </div>
-            <layerbuilderheader/>
         </div>
         <div data-options="region:'south',title:'Output Message',split:true,collapsed:false" style="height:300px;">
             <message-tab ng-controller="messageTabContrller"></message-tab>

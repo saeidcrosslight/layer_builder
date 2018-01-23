@@ -1,6 +1,6 @@
 <div>
     <div class="collapse navbar-collapse navbackground" id="bs-example-navbar-collapse-1" ng-controller="navigationController">
-      <!--  <ul class="nav navbar-nav" style="position:fixed;z-index:100">
+        <ul class="nav navbar-nav" style="position:fixed;z-index:100">
             <li class='dropdown' ng-repeat="nav in product.navigations">
                 <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'>{{nav.name}}</a>
                 <ul ng-model="nav.menus" class='dropdown-menu' role='menu'>
@@ -11,7 +11,7 @@
                     </li>
                 </ul>
             </li>
-        </ul>-->
+        </ul>
     </div>
     <div class="quickbar Apsys" ng-controller="quickBarController">
         <button ng-repeat="quickbar in product.quickMenus" title="{{quickbar.title}}" class="{{quickbar.disabled}}" ng-click="quickEvent($index,quickbar.disabled)">
