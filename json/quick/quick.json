@@ -24,75 +24,28 @@
         "title": "Save all in the project"
     },
     {
-        "name": "Undo",
-        "class": "glyphicon glyphicon-arrow-left",
-        "disabled": "disabled",
-        "title": "Undo the last action"
-    },
-    {
-        "name": "Redo",
-        "class": "glyphicon glyphicon-arrow-right",
-        "disabled": "disabled",
-        "title": "Redo the previously undone action"
-    },
-    {
-        "name": "Run",
-        "class": "glyphicon glyphicon-play btnstart",
+        "name": "Settings",
+        "class": "glyphicon glyphicon-cog",
         "disabled": "",
-        "title": "Simulate"
+        "title": "Set the path of this application"
     },
     {
-        "name": "Stop",
-        "class": "glyphicon glyphicon-stop btnstop",
-        "disabled": "disabled",
-        "title": "Terminate simulation"
-    },
-    {
-        "name": "CMD",
-        "class": "",
-        "disabled": "",
-        "title": "Open console"
-    },
-    {
-        "name": "Contact",
-        "class": "",
-        "disabled": "disabled",
-        "title": "Contact design"
-    },
-    {
-        "name": "LayerBuilder",
+        "name": "Gen.Layer",
         "class": "",
         "disabled": "",
         "title": "Call layerbuilder.exe"
     },
     {
-        "name": "Layer3d",
+        "name": "Gen.Geo",
         "class": "",
         "disabled": "",
-        "title": "Call layer3d.exe"
+        "title": "Call geo.exe"
     },
     {
         "name": "Gen.Mesh",
         "class": "",
         "disabled": "",
         "title": "Generate Mesh"
-    },
-    {
-        "name": "Plot.Plt",
-        "class": "",
-        "disabled": "",
-        "title": "View plt result"
-    },
-    {
-        "name": "Template",
-        "class": "",
-        "disabled": "disabled",
-        "title": "A collection of template for mosfet device simulation.(e.g. BV, Vth, IdVd, Ron)"
-    },
-    {
-        "name": "Settings",
-        "class": "glyphicon glyphicon-cog",
-        "disabled": "",
-        "title": "Set the path of this application"
     }
+
 ]

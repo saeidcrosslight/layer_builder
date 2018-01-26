@@ -1,22 +1,25 @@
 
-.tabbar{ clear: left; border-bottom:2px solid #70C55A; margin-top:2px }/*apsys切换颜色*/
+.tabbar{ clear: left; border-bottom:2px solid #7f7fff; margin-top:2px }/*apsys切换颜色*/
 
-.navbackground{ background:#70C55A }
+.navbackground{ background:#7f7fff }
 
-.panel-header,.panel-body{ border:1px solid #87CB87 }/*可拖拉边框的颜色*/
+.panel-header,.panel-body{ border:1px solid #7f7fff }/*可拖拉边框的颜色*/
 
-.layout-split-west{ border-right:5px solid #B1D692 }
-.layout-split-south{ border-top:5px solid #BCDB9F }
-.layout-split-east{ border-left:5px solid #BCDB9F }
-.layout-split-north{ border-bottom:5px solid #BCDB9F }
+.layout-split-west{ border-right:5px solid #7f7fff }
+.layout-split-south{ border-top:5px solid #7f7fff }
+.layout-split-east{ border-left:5px solid #7f7fff }
+.layout-split-north{ border-bottom:5px solid #7f7fff }
 
-.panel-header,.accordion-noborder .accordion-header,.easyui-layout h5{ background: #c9e2b3; color:#447206 }/*区域标题颜色*/
-.easyui-layout h5 .glyphicon{ color:#447206 }
+.panel-header,.accordion-noborder .accordion-header,.easyui-layout h5{ background: #4c4cff; color:#3232ff }/*区域标题颜色*/
+.easyui-layout h5 .glyphicon{ color:#7f7fff }
 
 .panel-title{ background: none }
 
-.tabs{ border:1px solid #c9e2b3 }
+.tabs{ border:1px solid #7f7fff }
 
-.tabs li.tabs-selected a.tabs-inner,.tabs li a.tabs-inner{ color:#588526; background:none }
+.tabs li.tabs-selected a.tabs-inner,.tabs li a.tabs-inner{ color:#3232ff; background:none }
 
-.welcome{background:#4C8529}
+.welcome{background:#3232ff}
+.panel-title{
+    color: black;
+}
