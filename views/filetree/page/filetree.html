@@ -5,7 +5,7 @@
             <a ng-if="node.nodes && node.nodes.length > 0" data-nodrag>
                 <span style="font-size:14px" class="glyphicon" ng-class="{'glyphicon-folder-close': collapsed, 'glyphicon-folder-open': !collapsed}"></span>
             </a>
-            <span ng-if="node.nodes.length===0" title="{{node.title}}">
+            <span ng-if="node.nodes.length===0" title="{{node.title}}" ng-mousedown="treeNodeClick(node.type, node.title, node.url, node.treeType, $event)">
                 <i style="font-size:14px" class="glyphicon glyphicon-file"></i>{{node.title}}
             </span>
             <span ng-if="node.nodes.length>0" title="{{node.title}}">{{node.title}}</span>

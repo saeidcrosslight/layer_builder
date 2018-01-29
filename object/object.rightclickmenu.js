@@ -38,6 +38,7 @@ angular
                             return menuobj;
                         },
                         createMenuList = function (type, fileName, filePath, treeType) {
+                    debugger;
                             var pannelNumber = [1, 2, 3, 4], //Edit, Rename, Delete, Property                                
                                     rightmenu = this;
                             if (type === 'folder') {                                

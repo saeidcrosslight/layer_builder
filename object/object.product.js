@@ -2,7 +2,7 @@
 
 angular
         .module('object.product', [])
-        .factory('product', ['$rootScope', 'filetree', 'message', 'editor', 'file', 'childprocess', '$sce', function ($rootScope, filetrees, messages, editor, file, childprocess, $sce) {
+        .factory('product', ['$rootScope', 'filetree','rightclickmenu', 'message', 'editor', 'file', 'childprocess', '$sce', function ($rootScope, filetrees, rightclickmenu, messages, editor, file, childprocess, $sce) {
                 var factory = {},
                         productObject = function () {
                     debugger;
@@ -16,6 +16,9 @@ angular
                             this.openFiles = [];
                             this.runFileList = [];
                             this.wizard = [];
+                            this.LAYER= "\\layer.exe", //apsys / pics3d
+                            this.GEOMETRY= "\\geometry.exe", //apsys / pics3d
+                            this.rightClickMenu =rightclickmenu.createRightClickMenuObject();
                             this.filetree = filetrees.createFiletreeObject();
                             this.message = messages.createMessageObject();
                             this.editors = editor.createEditorContainerObject();
@@ -458,7 +461,7 @@ angular
                                 this.message.runtime.cleanMessage();
                                 callAppToRun(this, '', filePath.substr(0, lindex) + "\\" + batName, '', this.message.runtime, -1);
                             }
-                        };
+                        },
                         // createProject = function (projectName, projectPath, fileTypes) {
                         //     if (file.existsfile(projectPath)) {
                         //         if (confirm("The project path already exists, are sure use it?")) {
@@ -564,20 +567,21 @@ angular
                         //  *         3
                         //  *         4
                         //  */
-                        // doFreshData = function (product, data, msgbox, type,treetype) {
-                        //     dataFresh(product, data, msgbox);
-                        //     if(type === 0 || type === 1 || (type === 2 && treetype !== 'seriesfile')){ //updata inputfile & outputfile
-                        //         product.filetree.resetInputOutputFileTree(product.filetree);
-                        //         product.filetree.createInputOutputFileTree(product.filetree, product.projectPath);
-                        //     }else if((type === 2 && treetype === 'seriesfile') || type === 4){ //update seriesfile
-                        //         product.filetree.resetSeriesFileTree(product.filetree);
-                        //         var seriesPath = product.projectPath + "\\Projects";
-                        //         if (file.existsfile(seriesPath)) {
-                        //             var files = file.readfoldersync(seriesPath);
-                        //             product.filetree.creatSeriesFileTree(files, product.filetree.seriesfiles[0], seriesPath);
-                        //         }
-                        //     }
-                        // },
+                        doFreshData = function (product, data, msgbox, type,treetype) {
+                    debugger;
+                            dataFresh(product, data, msgbox);
+                            if(type === 0 || type === 1 || (type === 2 && treetype !== 'seriesfile')){ //updata inputfile & outputfile
+                                product.filetree.resetInputOutputFileTree(product.filetree);
+                                product.filetree.createInputOutputFileTree(product.filetree, product.projectPath);
+                            }else if((type === 2 && treetype === 'seriesfile') || type === 4){ //update seriesfile
+                                product.filetree.resetSeriesFileTree(product.filetree);
+                                var seriesPath = product.projectPath + "\\Projects";
+                                if (file.existsfile(seriesPath)) {
+                                    var files = file.readfoldersync(seriesPath);
+                                    product.filetree.creatSeriesFileTree(files, product.filetree.seriesfiles[0], seriesPath);
+                                }
+                            }
+                        },
                         // setLightHight = function (product, currentLineFile, lineAmount, lastLine, ifFileOpen, editorId) {
                         //     return window.setInterval(function () {
                         //         var currentLine = 0;
@@ -601,68 +605,71 @@ angular
                         //         }
                         //     }, 500);
                         // },
-                        // callAppToRun = function (product, appName, fileName, outpath, msgbox, type, treetype) {
-                        //     debugger;
-                        //     $("#loading").show();
-                        //     var lastLine = 0;
-                        //     var ifFileOpen = false;
-                        //     var editorId = product.editors.getEditorObject("CSuprem", fileName, outpath).editorID;
-                        //     angular.forEach(product.openFiles, function(of){
-                        //         if(of.fileName == fileName && of.editorID == editorId)
-                        //             ifFileOpen = true;
-                        //     });
-                        //     if (fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length) === 'in') { //only for CSuprem
-                        //         var lineAmount = file.readallsync(outpath + '\\' + fileName).split("\r\n").length;
-                        //         var callRunningLighthigh = setLightHight(product, outpath + "\\currentLine.json", lineAmount, lastLine, ifFileOpen, "#editorContainer_CSuprem #"+ editorId +" .ace_layer");
-                        //     }
-                        //
-                        //     childprocess.callbackground(appName, fileName, outpath,
-                        //             function (data) {
-                        //                 doFreshData(product, data, msgbox, type,treetype);
-                        //             },
-                        //             function (data) {
-                        //                 doFreshData(product, data, msgbox, type,treetype);
-                        //             },
-                        //             function (code) {
-                        //                 window.clearInterval(callRunningLighthigh); //clear timeout function
-                        //                 if (file.existsfile(outpath + "\\currentLine.json"))
-                        //                     file.delfile(outpath + "\\currentLine.json");
-                        //
-                        //                 if (outpath !== "" && fileName.indexOf("\\") === -1) {
-                        //                     var str = "---------------------------------Start Simulation---------------------------------\r\n\r\n";
-                        //                     angular.forEach(msgbox.content, function (content) {
-                        //                         if (content.indexOf("#_#") !== -1 || content.indexOf("###") !== -1)
-                        //                             str += content.replaceAll("_", " ") + "\n";
-                        //                         else
-                        //                             str += content + "\n";
-                        //                     });
-                        //                     str += "---------------------------------Finish Simulation---------------------------------";
-                        //                     file.writeallsync(outpath + "\\" + fileName.split(".")[0] + ".log", str);
-                        //                 }
-                        //
-                        //                 doFreshData(product, 'finished.', msgbox, type,treetype);
-                        //                 closeStop(product);
-                        //
-                        //                 var ename = getExtensionName(fileName);
-                        //                 var tempPath = outpath + '\\psview_' + angular.lowercase(product.productName) + ".bat";
-                        //                 var tempName = fileName;
-                        //                 if (fileName.indexOf("\\") !== -1) {
-                        //                     ename = getExtensionName(fileName.substr(fileName.lastIndexOf("\\") + 1));
-                        //                     tempPath = product.projectPath + '\\psview_' + angular.lowercase(product.productName) + ".bat";
-                        //                     tempName = fileName.substr(fileName.lastIndexOf("\\") + 1);
-                        //                 }
-                        //                 if (ename === "bat" && tempName.substr(0, 3) === "RUN") {  //delete RUN*.bat
-                        //                     file.delfile(fileName);
-                        //                     if (file.existsfile(tempPath))
-                        //                         file.delfile(tempPath);
-                        //                     product.filetree.resetAllFileTree(product.filetree);
-                        //                     product.filetree.createAllFileTree(product.filetree, product.projectPath);
-                        //                 }
-                        //
-                        //                 $("#loading").hide();
-                        //                 $("#fixNoRefresh").click();
-                        //             });
-                        // },
+                        callAppToRun = function (product, appName, fileName, outpath, msgbox, type, treetype) {
+                            product.appPath = "C:\\NovaTCAD\\Apsys";
+                            product.productName="Apsys";
+                            product.appPathName = "ApsysPath";
+                            debugger;
+                            $("#loading").show();
+                            var lastLine = 0;
+                            var ifFileOpen = false;
+                            var editorId = product.editors.getEditorObject("CSuprem", fileName, outpath).editorID;
+                            angular.forEach(product.openFiles, function(of){
+                                if(of.fileName == fileName && of.editorID == editorId)
+                                    ifFileOpen = true;
+                            });
+                            if (fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length) === 'in') { //only for CSuprem
+                                var lineAmount = file.readallsync(outpath + '\\' + fileName).split("\r\n").length;
+                                var callRunningLighthigh = setLightHight(product, outpath + "\\currentLine.json", lineAmount, lastLine, ifFileOpen, "#editorContainer_CSuprem #"+ editorId +" .ace_layer");
+                            }
+
+                            childprocess.callbackground(appName, fileName, outpath,
+                                    function (data) {
+                                        doFreshData(product, data, msgbox, type,treetype);
+                                    },
+                                    function (data) {
+                                        doFreshData(product, data, msgbox, type,treetype);
+                                    },
+                                    function (code) {
+                                        window.clearInterval(callRunningLighthigh); //clear timeout function
+                                        if (file.existsfile(outpath + "\\currentLine.json"))
+                                            file.delfile(outpath + "\\currentLine.json");
+
+                                        if (outpath !== "" && fileName.indexOf("\\") === -1) {
+                                            var str = "---------------------------------Start Simulation---------------------------------\r\n\r\n";
+                                            angular.forEach(msgbox.content, function (content) {
+                                                if (content.indexOf("#_#") !== -1 || content.indexOf("###") !== -1)
+                                                    str += content.replaceAll("_", " ") + "\n";
+                                                else
+                                                    str += content + "\n";
+                                            });
+                                            str += "---------------------------------Finish Simulation---------------------------------";
+                                            file.writeallsync(outpath + "\\" + fileName.split(".")[0] + ".log", str);
+                                        }
+
+                                        doFreshData(product, 'finished.', msgbox, type,treetype);
+                                        // closeStop(product);
+
+                                        var ename = getExtensionName(fileName);
+                                        var tempPath = outpath + '\\psview_' + angular.lowercase(product.productName) + ".bat";
+                                        var tempName = fileName;
+                                        if (fileName.indexOf("\\") !== -1) {
+                                            ename = getExtensionName(fileName.substr(fileName.lastIndexOf("\\") + 1));
+                                            tempPath = product.projectPath + '\\psview_' + angular.lowercase(product.productName) + ".bat";
+                                            tempName = fileName.substr(fileName.lastIndexOf("\\") + 1);
+                                        }
+                                        if (ename === "bat" && tempName.substr(0, 3) === "RUN") {  //delete RUN*.bat
+                                            file.delfile(fileName);
+                                            if (file.existsfile(tempPath))
+                                                file.delfile(tempPath);
+                                            product.filetree.resetAllFileTree(product.filetree);
+                                            product.filetree.createAllFileTree(product.filetree, product.projectPath);
+                                        }
+
+                                        $("#loading").hide();
+                                        $("#fixNoRefresh").click();
+                                    });
+                        },
                         // callAppToRun2 = function (product, fileName, msgbox, callback) {
                         //     childprocess.callbackground('', fileName, '',
                         //             function (data) {
@@ -680,24 +687,25 @@ angular
                         //             function () {
                         //             }, callback);
                         // },
-                        // dataFresh = function (product, data, msgbox) {
-                        //     setMessage(data, msgbox); //set message
-                        //     $("#fixNoRefresh").click();
-                        //     document.getElementById("msgcontent" + product.productName).scrollTop = document.getElementById("msgcontent" + product.productName).scrollHeight;
-                        // },
-                        // setMessage = function (data, msgbox) {
-                        //     var str = data.toString().split("\n");
-                        //
-                        //     angular.forEach(str, function (msgstr) {
-                        //         if((msgstr.indexOf(".layer") > -1 || msgstr.indexOf(".geo") > -1 || msgstr.indexOf(".mater") > -1 || msgstr.indexOf(".mplt") > -1 || msgstr.indexOf(".plt") > -1) && msgbox.name !== "simu"){
-                        //             msgbox.cleanMessage();
-                        //             msgbox.content.push("--------------------Start--------------------");
-                        //         }
-                        //         msgstr = msgstr.replace(/\\\\/g, "\\");
-                        //         msgstr = msgstr.replace(/['"]+/g, '');
-                        //         msgbox.content.push(msgstr);
-                        //     });
-                        // },
+                        dataFresh = function (product, data, msgbox) {
+                    debugger;
+                            setMessage(data, msgbox); //set message
+                            $("#fixNoRefresh").click();
+                            // document.getElementById("msgcontent" + product.productName).scrollTop = document.getElementById("msgcontent" + product.productName).scrollHeight;
+                        },
+                        setMessage = function (data, msgbox) {
+                            var str = data.toString().split("\n");
+
+                            angular.forEach(str, function (msgstr) {
+                                if((msgstr.indexOf(".layer") > -1 || msgstr.indexOf(".geo") > -1 || msgstr.indexOf(".mater") > -1 || msgstr.indexOf(".mplt") > -1 || msgstr.indexOf(".plt") > -1) && msgbox.name !== "simu"){
+                                    msgbox.cleanMessage();
+                                    msgbox.content.push("--------------------Start--------------------");
+                                }
+                                msgstr = msgstr.replace(/\\\\/g, "\\");
+                                msgstr = msgstr.replace(/['"]+/g, '');
+                                msgbox.content.push(msgstr);
+                            });
+                        },
                         // getSettingValue = function (settingJSON, pathName) {
                         //     var appPath = "";
                         //     for (var app in settingJSON) {
@@ -724,10 +732,10 @@ angular
                         //     else if (pathName === "wizardFontSize")
                         //         uersetting.push({wizardFontSize: productPath});
                         // },
-                        // getExtensionName = function (fileName) {
-                        //     var fn = fileName.split(".");
-                        //     return fn[fn.length - 1];
-                        // },
+                        getExtensionName = function (fileName) {
+                            var fn = fileName.split(".");
+                            return fn[fn.length - 1];
+                        },
                         // getCurrentPath = function () {
                         //     var path = require('path');
                         //     return path.dirname(process.execPath);
@@ -771,13 +779,13 @@ angular
                         //     //sb += fileName + fileType2 + "\r\n";
                         //     file.writeallsync(projectPath + "\\" + batName, sb);//viewresult.bat
                         // },
-                        // writeBatFile2 = function (app, appName, projectPath, fileName) {
-                        //     var sb = new String();
-                        //     sb = projectPath.split("\\")[0] + "\r\n";
-                        //     sb += "cd \"" + projectPath + "\"\r\n";
-                        //     sb += "\"" + "C:\\NovaTCAD\\Apsy" + appName + "\" " + fileName;
-                        //     file.writeallsync(projectPath + "\\temp.bat", sb);//temp.bat
-                        // };
+                        writeBatFile2 = function (app, appName, projectPath, fileName) {
+                            var sb = new String();
+                            sb = projectPath.split("\\")[0] + "\r\n";
+                            sb += "cd \"" + projectPath + "\"\r\n";
+                            sb += "\"" + "C:\\NovaTCAD\\Apsy" + appName + "\" " + fileName;
+                            file.writeallsync(projectPath + "\\temp.bat", sb);//temp.bat
+                        };
 
                 factory.createProductObject = function () {
                     return new productObject();

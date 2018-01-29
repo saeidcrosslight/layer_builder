@@ -12,7 +12,7 @@
         <title>Layer Builder</title>
     </head>
     <!-- The ng-app directive -->
-    <body class="easyui-layout">
+    <body class="easyui-layout" ng-controller="contentController">
         <div data-options="region:'north',title:'Layer Builder',split:false, collapsible:false" style="height:180px;">
             <div class="easyui-layout" data-options="fit:true">
                 <div data-options="region:'north'" style="height:120px;">
@@ -37,11 +37,13 @@
             <message-tab ng-controller="messageTabContrller"></message-tab>
         </div>
         <div data-options="region:'west',title:'File Tree',split:true,collapsed:false" style="width:200px;">
-        <my-customer ng-controller="Controller"/>
+        <filetree ng-controller="filetreeController"/>
         </div>
         <div data-options="region:'center',title:'Structure Editor'" style="padding:5px;background:#eee;">
             <drawing-tool ng-controller="DrawingToolController"></drawing-tool>
         </div>
+        <div rightclickmenu></div>
+
         <script type="text/javascript" src="./src/angular/angular.min.js"></script>
         <script type="text/javascript" src="./src/angular-ui-tree/angular-ui-tree.min.js"></script>
         <script type="text/javascript" src="./src/fabric/fabric.js"></script>
@@ -61,13 +63,14 @@
         <script type="text/javascript" src="./views/header/js/quick.controller.js"></script>
         <script type="text/javascript" src="./object/object.validator.js"></script>
         <script type="text/javascript" src="./object/object.wizard.js"></script>
-        <script type="text/javascript" src="./views/filetree/js/filetree.directive.js"></script>
+        <script type="text/javascript" src="views/filetree/js/filetree.js"></script>
 
         <script type="text/javascript" src="./views/drawingTool/js/drawingTool.directive.js"></script>
         <script type="text/javascript" src="./views/messages/js/message.directive.js"></script>
         <script type="text/javascript" src="./views/rightclickmenu/rightclickmenu.js"></script>
 
         <script type="text/javascript" src="./js/nodejs.js"></script>
+        <script type="text/javascript" src="./js/shortcut.js"></script>
     </body>
 </html>
 

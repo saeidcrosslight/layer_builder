@@ -1,0 +1,182 @@
+[
+    {
+        "number": 1,
+        "name": "Edit",
+        "useable": true
+    }, {
+        "number": 2,
+        "name": "Rename",
+        "useable": true
+    }, {
+        "discription" : "This delete is for file right-click",
+        "number": 3,
+        "name": "Delete",
+        "useable": true
+    }, {
+        "number": 4,
+        "name": "Property",
+        "useable": true
+    }, {
+        "number": 5,
+        "name": "Simulate",
+        "useable": true
+    }, {
+        "number": 6,
+        "name": "Setup.plt",
+        "useable": false
+    }, {
+        "number": 7,
+        "name": "View result",
+        "useable": true
+    }, {
+        "number": 8,
+        "name": "Layer3d",
+        "useable": true
+    }, {
+        "number": 9,
+        "name": "Setup by command",
+        "useable": false
+    }, {
+        "number": 10,
+        "name": "Open with CrosslightView",
+        "useable": true
+    }, {
+        "number": 11,
+        "name": "Edit by SolverManager",
+        "useable": true
+    }, {
+        "number": 12,
+        "name": "Open with GhostView",
+        "useable": true
+    }, {
+        "number": 13,
+        "name": "Generate .gain and plot",
+        "useable": true
+    }, {
+        "number": 14,
+        "name": "Open with GeoEditor",
+        "useable": true
+    }, {
+        "number": 15,
+        "name": "Generate mesh",
+        "useable": true
+    }, {
+        "number": 16,
+        "name": "Generate all",
+        "useable": false
+    }, {
+        "number": 17,
+        "name": "Gain preview",
+        "useable": true
+    }, {
+        "number": 18,
+        "name": "View mesh",
+        "useable": true
+    }, {
+        "number": 19,
+        "name": "Run",
+        "useable": true
+    }, {
+        "number": 20,
+        "name": "Setup layer by command",
+        "useable": false
+    }, {
+        "number": 21,
+        "name": "Open with Layerbuilder",
+        "useable": true
+    }, {
+        "number": 22,
+        "name": "Process this .layer file to generate .geo",
+        "useable": true
+    }, {
+        "number": 23,
+        "name": "Process all .layer files to generate .geo",
+        "useable": false
+    }, {
+        "number": 24,
+        "name": "Plot",
+        "useable": true
+    }, {
+        "number": 25,
+        "name": "Add files",
+        "useable": false
+    }, {
+        "number": 26,
+        "name": "Add folder",
+       "useable": false
+    },{
+        "number": 41,
+        "name": "Simulate",
+        "useable": true
+    },{
+        "number": 42,
+        "name": "Open folder",
+        "useable": false
+    },{
+        "descriptiong" : "This delete for folder right-click",
+        "number": 43,
+        "name": "Delete",
+        "useable": false
+    },
+    
+    
+    {
+        "descriptiong":"-----------------------the following menu json data are for editor right-click menu----------------------",
+        "number": 27,
+        "name": "Cut",
+        "useable": false
+    }, {
+        "number": 28,
+        "name": "Copy",
+        "useable": false
+    }, {
+        "number": 29,
+        "name": "Paste",
+        "useable": false
+    }, {
+        "number": 30,
+        "name": "Check",
+        "useable": false
+    }, {
+        "number": 31,
+        "name": "User Defined Value",
+        "useable": false
+    }, {
+        "number": 32,
+        "name": "Series",
+        "useable": true
+    }, {
+        "number": 33,
+        "name": "Wizard",
+        "useable": true
+    }, {
+        "number": 34,
+        "name": "Mater Define",
+        "useable": true
+    }, {
+        "number": 35,
+        "name": "Comment out",
+        "useable": true
+    }, {
+        "number": 36,
+        "name": "Remove comments",
+        "useable": true
+    }, {
+        "number": 37,
+        "name": "Help",
+        "useable": false
+    }, {
+        "description":"-----------------------the following menu json data are for message right-click menu----------------------",
+        "number": 38,
+        "name": "Copy",
+        "useable": false
+    }, {
+        "number": 39,
+        "name": "Clear",
+        "useable": true
+    },{
+        "number": 40,
+        "name": "Save",
+        "useable": false
+    }
+]
