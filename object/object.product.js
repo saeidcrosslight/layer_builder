@@ -5,7 +5,6 @@ angular
         .factory('product', ['$rootScope', 'filetree','rightclickmenu', 'message', 'editor', 'file', 'childprocess', '$sce', function ($rootScope, filetrees, rightclickmenu, messages, editor, file, childprocess, $sce) {
                 var factory = {},
                         productObject = function () {
-                    debugger;
                             this.title = '';
                             this.appPath = '';
                             this.projectPath = '';
@@ -32,7 +31,7 @@ angular
                             this.init = init;
                             // this.appPathValidate = appPathValidate;
                             // this.getUserSetting = getUserSetting;
-                            // this.setUserSetting = setUserSetting;
+                            this.setUserSetting = setUserSetting;
                             // this.getSettingValue = getSettingValue;
                             this.getNavigation = getNavigation;
                              this.getQuickBar = getQuickBar;
@@ -56,7 +55,6 @@ angular
                             // this.refreshUndoRedo = refreshUndoRedo;
                         },
                         init = function () {
-                    debugger;
                             //this.appPath = getUserSetting(this);
                             this.navigations = getNavigation();
                             this.quickMenus = getQuickBar();
@@ -192,30 +190,28 @@ angular
                         //      return appPath;
                         //      }*/
                         // },
-                        // setUserSetting = function (pathName, productPath) {
-                        //     var uersetting = [];
-                        //     if (file.existsfile(userSettingPath())) {
-                        //         uersetting = angular.fromJson(file.readallsync(userSettingPath()));
-                        //         if (getSettingValue(uersetting, pathName) !== "") {
-                        //             for (var app in uersetting) {
-                        //                 for (var value in uersetting[app]) {
-                        //                     if (pathName === value) {
-                        //                         uersetting[app][value] = productPath;
-                        //                         break;
-                        //                     }
-                        //                 }
-                        //             }
-                        //         } else {
-                        //             pushSettingData(uersetting, pathName, productPath);
-                        //         }
-                        //     } else {
-                        //         pushSettingData(uersetting, pathName, productPath);
-                        //     }
-                        //     file.writeallsync(userSettingPath(), angular.toJson(uersetting));
-                        // },
+                        setUserSetting = function (pathName, productPath) {
+                            var uersetting = [];
+                            if (file.existsfile(userSettingPath())) {
+                                uersetting = angular.fromJson(file.readallsync(userSettingPath()));
+                                if (getSettingValue(uersetting, pathName) !== "") {
+                                    for (var app in uersetting) {
+                                        for (var value in uersetting[app]) {
+                                            if (pathName === value) {
+                                                uersetting[app][value] = productPath;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    pushSettingData(uersetting, pathName, productPath);
+                                }
+                            } else {
+                                pushSettingData(uersetting, pathName, productPath);
+                            }
+                            file.writeallsync(userSettingPath(), angular.toJson(uersetting));
+                        },
                         getNavigation = function () {
-                                debugger;
-                                console.log("jhjhfjhg");
                             return angular.fromJson(file.readallsync("json\\nav\\navigation.json"));
                         },
                         getQuickBar = function () {
@@ -427,7 +423,6 @@ angular
                         //  *                       = 1 for quick bar button
                         //  */
                         createBatFileToRun = function (appName, fileName, filePath, typeName, batName, toolbar) {
-                            debugger;
                             var mainFileName = fileName.split(".")[0],
                                     lindex = filePath.lastIndexOf("\\");
                             switch (typeName) {
@@ -568,7 +563,6 @@ angular
                         //  *         4
                         //  */
                         doFreshData = function (product, data, msgbox, type,treetype) {
-                    debugger;
                             dataFresh(product, data, msgbox);
                             if(type === 0 || type === 1 || (type === 2 && treetype !== 'seriesfile')){ //updata inputfile & outputfile
                                 product.filetree.resetInputOutputFileTree(product.filetree);
@@ -688,7 +682,6 @@ angular
                         //             }, callback);
                         // },
                         dataFresh = function (product, data, msgbox) {
-                    debugger;
                             setMessage(data, msgbox); //set message
                             $("#fixNoRefresh").click();
                             // document.getElementById("msgcontent" + product.productName).scrollTop = document.getElementById("msgcontent" + product.productName).scrollHeight;

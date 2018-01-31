@@ -1,0 +1,92 @@
+<div>
+    <div id="uploadProjectWindow" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width:780px">
+                <div class="modal-header">
+                    <h4 class="modal-title">Network computing</h4>
+                </div>
+                <div class="modal-body">
+                    <b>Step1: Select one series.</b><br>
+                    Project <b>{{networkObject.projectName}}</b> has <b>{{networkObject.seriesList.length}}</b> series folders.<br><br>                    
+                    <select style="width:80%; display: inline" ng-model="networkObject.selectedSeriesName" ng-change="getSeriesProjectNum()" ng-options="sobj.seriesFolderName for sobj in networkObject.seriesList" class="form-control">                        
+                        <option value="-1"></option>
+                    </select><span style="font-size:16px">(total <b>{{networkObject.selectedSubNumber}}</b> sub projects)</span><br>
+                    
+                    <hr style="border: 1px solid gray">
+                    
+                    <b>Step2: Set IP address for remote PC.</b><br>
+                    Distribute to: 
+                    <input type="text" class="form-control" ng-model="networkObject.distributeNum" style="width:110px;display:inline-block" placeholder="input number" /> computers. 
+                    <input type="button" value="Confirm & Set IP" class="btn btn-primary" ng-click="setRemotePC()" /><br><br>
+                    <div id="remotePCDiv">
+                        <div ng-repeat="rpc in networkObject.remotePClist">
+                            <b>PC{{$index+1}}: </b><input type="text" class="form-control" ng-model="rpc.ip" style="width:200px;display:inline-block" placeholder="IP address" />, 
+                            <!--Saved path: <input type="text" ng-model="rpc.savedPath" class="form-control" style="width:200px;display:inline-block" />-->
+                            Distribute Number: <input type="text" ng-model="rpc.distributeNum" class="form-control" style="width:40px;display:inline-block" />
+                            <!--button ng-click="pingRemotePC(rpc.ip,$index)" type="button" class="btn btn-primary">Ping</button-->
+                            <span>{{rpc.connectInfo}}</span>
+                        </div>
+                        <div style="text-align: right">
+                            <button ng-click="pingRemotePC()" type="button" class="btn btn-primary">Ping</button>
+                            <button ng-click="uploadProject()" type="button" class="btn btn-primary">Upload</button>
+                        </div>
+                    </div>
+                    
+                    <hr style="border: 1px solid gray">
+                    
+                    <b>Step3: Set performing the process.</b><br>
+                    <table>
+                        <tr>
+                            <td rowspan="6" style="vertical-align: top; width:"><input ng-model="networkObject.processList[0].isCsuprem" type="checkbox" id="p1"><label for="p1">Run CSuprem</label></td>
+                            <td rowspan="6" style="vertical-align: top; width: 200px; padding-right: 20px;">
+                                <select ng-model="networkObject.processList[0].inFile" ng-options="inList for inList in networkObject.processList[0].inList" class="form-control">
+                                    <option value="-1"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input ng-model="networkObject.processList[1].isLayer" type="checkbox" id="p2"><label for="p2">Run Layer</label></td>
+                            <td style="width: 200px;">
+                                <select ng-model="networkObject.processList[1].layerFile" ng-options="layerList for layerList in networkObject.processList[1].layerList" class="form-control">
+                                    <option value="-1"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input ng-model="networkObject.processList[2].isGeo" type="checkbox" id="p3"><label for="p3">Run Geo</label></td>
+                            <td>
+                                <select ng-model="networkObject.processList[2].geoFile" ng-options="geoList for geoList in networkObject.processList[2].geoList" class="form-control">
+                                    <option value="-1"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input ng-model="networkObject.processList[3].isApsys" type="checkbox" id="p4"><label for="p4">Run Apsys</label></td>
+                            <td rowspan="2">
+                                <select ng-model="networkObject.processList[3].solFile" ng-options="solList for solList in networkObject.processList[3].solList" class="form-control">
+                                    <option value="-1"></option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input ng-model="networkObject.processList[4].isPics3d" type="checkbox" id="p5"><label for="p5">Run Pics3d</label></td>
+                        </tr>
+                        <tr>
+                            <td><input ng-model="networkObject.processList[5].isPlt" type="checkbox" id="p6"><label for="p6">Run Plt</label></td>
+                            <td>
+                                <select ng-model="networkObject.processList[5].pltFile" ng-options="pltList for pltList in networkObject.processList[5].pltList" class="form-control">
+                                    <option value="-1"></option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button ng-click="resetUploadWin()" type="button" class="btn btn-primary">Reset</button>                    
+                    <button ng-click="remoteCompute(networkObject.selectedSeriesName)" type="button" class="btn" title="Start Compute"><i class="glyphicon glyphicon-play btnstart"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

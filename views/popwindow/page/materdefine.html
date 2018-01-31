@@ -1,0 +1,45 @@
+<div>
+    <table class="tabMaterDefine">
+        <tr>
+            <td width="20%">Material Library:</td>
+            <td width="30%"><input  ng-model="materialName" /><br>
+                <select ng-model="materialName" onchange="changeMater()" id="materialName" size="10" style="width:174px;height:120px">
+                    <option ng-repeat="name in materialList" ng-selected="materialName==name">{{name}}</option>
+                </select>
+            </td>
+            <td width="20%">
+                Model:
+            </td>
+            <td width="30%">
+                <input type="radio" name="materialModel" id="bulk" value="bulk" checked="checked" /><label for="bulk">bulk</label><br>
+                <input type="radio" name="materialModel" id="bulk_active" value="bulk_active" /><label for="bulk_active">bulk_active</label><br>
+                <input type="radio" name="materialModel" id="quantum_well" value="quantum_well" /><label for="quantum_well">quantum_well</label><br>
+                <input type="radio" name="materialModel" id="quantum_wire" value="quantum_wire" /><label for="quantum_wire">quantum_wire</label><br>              
+            </td>
+        </tr>
+        <tr>
+            <td>Material Label:</td>
+            <td><input ng-model="materialLabel" /></td>
+            <td>Composition Parameter:</td>
+            <td>Which composition parameter do you wish to grade?<br>
+                <input type="radio" name="grading" id="grading0" value="grading0" checked="checked" /><label for="grading0" style="margin-right: 10px">0</label>
+                <input type="radio" name="grading" id="grading1" value="grading1" /><label for="grading1" style="margin-right: 10px">1</label>
+                <input type="radio" name="grading" id="grading2" value="grading2" /><label for="grading2" style="margin-right: 10px">2</label>
+                <input type="radio" name="grading" id="grading3" value="grading3" /><label for="grading3" style="margin-right: 10px">3</label>
+                <input type="radio" name="grading" id="grading4" value="grading4" /><label for="grading4" style="margin-right: 10px">4</label>
+            </td>
+        </tr>    
+        <tr>
+            <td style="vertical-align: top">Description:</td>
+            <td colspan="3"><textarea rows="10" style="width:550px" readonly="readonly"></textarea></td>
+        </tr>
+        <tr>
+            <td>Set Parameter Value:</td>            
+            <td colspan="3"></td>
+        </tr>
+    </table>
+    <div style="text-align: center">
+        <button class="btn btn-primary" ng-click="materDefine()">OK</button>
+        <button class="btn" ng-click="closeMaterDefine()">Cancel</button>
+    </div>
+</div>

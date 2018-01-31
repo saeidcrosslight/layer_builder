@@ -1,0 +1,52 @@
+<div>
+    <table style="width:100%">
+        <tr>
+            <td style="width:150px">Editor Font Size:</td>
+            <td>
+                <select id="editorFontSize" onchange="changeEditorFont()" ng-model="simucenter.editorFontSize">
+                    <option ng-repeat="font in fontSizeList">{{font}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Preview:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2" id="editorPreview" style="border:1px solid #ddd; padding: 10px; height:40px;">
+                <span style="color:red">line</span> <span style="blue">x loc</span><span>=</span><span style="color:red">0.0</span> <span style="color:blue">spacing</span><span>=</span><span style="color:red">1</span> <span style="color:blue">tag</span><span>=lft</span>
+            </td>
+        </tr>
+        <!--tr>
+            <td style="padding-top: 30px">Wizard Font Size:</td>
+            <td style="padding-top: 30px">
+                <select id="wizardFontSize" onchange="changeWizardFont()" ng-model="simucenter.wizardFontSize">
+                    <option ng-repeat="font in fontZoom">{{font}}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Preview:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2" id="wizardPreview">
+                <iframe name="helpPreview" src="initialize.htm" style="height:280px;border:1px solid #ddd"></iframe>
+            </td>
+        </tr-->
+        <!--tr>
+            <td>System Font Size:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border:1px solid #ddd; color:blue" id="systemPreview">
+                System Font Size Preview
+            </td>
+        </tr-->
+    </table>
+    <div style="text-align: right">
+        <button class="btn btn-primary" ng-click="resetFontSize()">Reset All</button>
+        <button class="btn btn-primary" ng-click="setFontSize()">OK</button>
+        <button class="btn" ng-click="closePreference()">Cancel</button>
+    </div>
+</div>

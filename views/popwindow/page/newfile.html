@@ -1,0 +1,52 @@
+<div>
+    <div id="newFileWindow" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" ng-controller="quickBarController">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">New File</h4>
+                </div>
+                <div class="modal-body">
+                    Choose a File Type:<br>
+                    <table style="width:50%">
+                        <tr>
+                            <td><input type="radio" name="newFileType" id="layer" /><label for="layer">Layer</label></td>
+                            <td><input type="radio" name="newFileType" id="gain" /><label for="gain">Gain</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="newFileType" id="geo" /><label for="geo">Geo</label></td>
+                            <td><input type="radio" name="newFileType" id="rtgain" /><label for="rtgain">RtGain</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="newFileType" id="mater" /><label for="mater">Mater</label></td>
+                            <td><input type="radio" name="newFileType" id="sol" /><label for="sol">Sol</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="newFileType" id="doping" /><label for="doping">Doping</label></td>
+                            <td><input type="radio" name="newFileType" id="plt" /><label for="plt">Plt</label></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" name="newFileType" id="mplt" /><label for="mplt">Mplt</label></td>
+                            <td><input type="radio" name="newFileType" id="bat" /><label for="bat">Bat</label></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="radio" name="newFileType" id="mac" /><label for="mac">Mac</label></td>
+                        </tr>
+                    </table>
+                    File Name:<br>
+                    <input type="text" id="newFileName" onkeyup="updateFilePath()" onchange="updateFilePath()" class="form-control" /><br><br>
+                    
+                    File Path:<br>
+                    <input type="text" id="newFilePath" onchange="updateFilePath()" class="form-control" />
+                    <input id="chooseFilePath" type="file" nwdirectory style="width:60px" /><br><br>
+                    
+                    
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button ng-click="newFile()" type="button" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

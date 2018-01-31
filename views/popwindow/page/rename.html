@@ -1,0 +1,23 @@
+<div>
+    <div id="renameWindow" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">File Rename</h4>
+                </div>
+                <div class="modal-body">
+                    Current Name:<br>
+                    <input type="text" readonly="readonly" ng-model="oldFileName" class="form-control" /><br><br>
+                    
+                    New Name:<br>
+                    <input type="text" ng-model="newFileName" class="form-control" /><br><br>
+                    <span class="note">Please enter the full file name, <b>eg: testProject.in</b>. </span>
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button ng-click="fileRename()" type="button" class="btn btn-primary">OK</button>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

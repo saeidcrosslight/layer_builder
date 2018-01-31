@@ -1,0 +1,22 @@
+<div>
+    <div id="deleteFileWindow" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete File Option</h4>
+                </div>
+                <div class="modal-body">                    
+                    <input type="checkbox" id="deleteFromDisk" ng-model="deleteFromDisk" />
+                    <label for="deleteFromDisk">Delete file from disk</label><br><br>
+                    
+                    <input type="checkbox" id="removeFromProject" ng-model="removeFromProject" />
+                    <label for="removeFromProject">Remove file from project</label><br><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button ng-click="deleteFile()" type="button" class="btn btn-primary">OK</button>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

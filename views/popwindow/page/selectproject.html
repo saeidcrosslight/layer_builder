@@ -1,0 +1,29 @@
+<div>
+    <div id="selectProjectWindow" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" ng-controller="quickBarController">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select one project file</h4>
+                </div>
+                <div class="modal-body" id="filelist">
+                    <div ng-if="simucenter.CSuprem.isCurrentApp" ng-repeat="file in simucenter.CSuprem.runFileList">
+                        <input type='radio' name='CSupremProjectFilelist' id='CSupremProject_{{$index}}' value="{{file.fileName}}"><label for="CSupremProject_{{$index}}">{{file.fileName}}</label>
+                    </div>
+                    <div ng-if="simucenter.Apsys.isCurrentApp" ng-repeat="file in simucenter.Apsys.runFileList">
+                        <input type='radio' name='ApsysProjectFilelist' id='ApsysProject_{{$index}}' value="{{file.fileName}}"><label for="ApsysProject_{{$index}}">{{file.fileName}}</label>
+                    </div>
+                    <div ng-if="simucenter.Pics3d.isCurrentApp" ng-repeat="file in simucenter.Pics3d.runFileList">
+                        <input type='radio' name='Pics3dProjectFilelist' id='Pics3dProject_{{$index}}' value="{{file.fileName}}"><label for="Pics3dProject_{{$index}}">{{file.fileName}}</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    
+                    <button ng-if="simucenter.CSuprem.isCurrentApp" ng-click="selectProject(simucenter.CSuprem, simucenter.CSuprem.runFileList[0])" type="button" class="btn btn-primary">Run</button>
+                    <button ng-if="simucenter.Apsys.isCurrentApp" ng-click="selectProject(simucenter.Apsys, simucenter.Apsys.runFileList[0])" type="button" class="btn btn-primary">Run</button>
+                    <button ng-if="simucenter.Pics3d.isCurrentApp" ng-click="selectProject(simucenter.Pics3d, simucenter.Pics3d.runFileList[0])" type="button" class="btn btn-primary">Run</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

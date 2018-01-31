@@ -1,0 +1,39 @@
+<div>
+    <div id="showPropertyWindow" style="display:none;">
+        <div>
+            <h4 class="modal-title"><span id="showPropertyFileName"></span> Property</h4>
+        </div>
+        <hr>
+        <div>                    
+            <table>
+                <tr>
+                    <td>File Name:</td>
+                    <td><span id="showPropertyFileName2"></span></td>
+                </tr>
+                <tr>
+                    <td>File Path:</td>
+                    <td style="word-break:break-all;width:80%"><span id="showPropertyFilePath"></span></td>
+                </tr>
+                <tr>
+                    <td>Size:</td>
+                    <td><span id="showPropertySize"></span>(KB)</td>
+                </tr>
+                <tr style="border-top:1px solid #eee">
+                    <td>Create Time:</td>
+                    <td><span id="showPropertyCreateTime"></span></td>
+                </tr>
+                <tr>
+                    <td>Modify Time:</td>
+                    <td><span id="showPropertyModifyTime"></span></td>
+                </tr>
+                <tr>
+                    <td>Access Time:</td>
+                    <td><span id="showPropertyAccessTime"></span></td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center">                    
+            <button type="button" ng-click="showPropertyOK()" class="btn btn-default" data-dismiss="modal">OK</button>
+        </div>
+    </div>
+</div>

@@ -84,7 +84,6 @@ angular
                 
                 //hide right-click pannel
                 $("body").bind("mousedown", function (event) {
-                    debugger;
                     var e = event ? event : (window.event ? window.event : null);
                     if (e.button === 0) {
                         setTimeout(function () {

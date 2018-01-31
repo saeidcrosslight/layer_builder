@@ -70,6 +70,7 @@ angular.module('quick.controller', [])
                             });
                         },
                         userSettingFunction = function (product, chooseID, appPathID, helpPath) {
+                            debugger;
                             $("#userSettingWindow").modal('toggle');
                             var pj = document.querySelector(chooseID);
                             pj.addEventListener("change", function (evt) {
@@ -415,6 +416,9 @@ angular.module('quick.controller', [])
                             break;
                         case 2: //Close
                             closeProjectFunction(apsys);
+                            break;
+                        case 4: //User Setting
+                            userSettingFunction(product, '#appPathFolder_Apsys', "input[ng-model='product.appPath']", "/GUI/HTML/general/manualse280.html");
                             break;
                        /* case 3: //Save
                             //apsys.editors.saveCurrentFile(apsys);
