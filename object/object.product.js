@@ -699,46 +699,46 @@ angular
                                 msgbox.content.push(msgstr);
                             });
                         },
-                        // getSettingValue = function (settingJSON, pathName) {
-                        //     var appPath = "";
-                        //     for (var app in settingJSON) {
-                        //         for (var value in settingJSON[app]) {
-                        //             if (pathName === value) {
-                        //                 appPath = settingJSON[app][value];
-                        //                 break;
-                        //             }
-                        //         }
-                        //     }
-                        //     if (appPath === undefined)
-                        //         appPath = "";
-                        //     return appPath;
-                        // },
-                        // pushSettingData = function (uersetting, pathName, productPath) {
-                        //     if (pathName === "CSupremPath")
-                        //         uersetting.push({CSupremPath: productPath});
-                        //     else if (pathName === "ApsysPath")
-                        //         uersetting.push({ApsysPath: productPath});
-                        //     else if (pathName === "Pics3dPath")
-                        //         uersetting.push({Pics3dPath: productPath});
-                        //     else if (pathName === "editorFontSize")
-                        //         uersetting.push({editorFontSize: productPath});
-                        //     else if (pathName === "wizardFontSize")
-                        //         uersetting.push({wizardFontSize: productPath});
-                        // },
+                        getSettingValue = function (settingJSON, pathName) {
+                            var appPath = "";
+                            for (var app in settingJSON) {
+                                for (var value in settingJSON[app]) {
+                                    if (pathName === value) {
+                                        appPath = settingJSON[app][value];
+                                        break;
+                                    }
+                                }
+                            }
+                            if (appPath === undefined)
+                                appPath = "";
+                            return appPath;
+                        },
+                        pushSettingData = function (uersetting, pathName, productPath) {
+                            if (pathName === "CSupremPath")
+                                uersetting.push({CSupremPath: productPath});
+                            else if (pathName === "ApsysPath")
+                                uersetting.push({ApsysPath: productPath});
+                            else if (pathName === "Pics3dPath")
+                                uersetting.push({Pics3dPath: productPath});
+                            else if (pathName === "editorFontSize")
+                                uersetting.push({editorFontSize: productPath});
+                            else if (pathName === "wizardFontSize")
+                                uersetting.push({wizardFontSize: productPath});
+                        },
                         getExtensionName = function (fileName) {
                             var fn = fileName.split(".");
                             return fn[fn.length - 1];
                         },
-                        // getCurrentPath = function () {
-                        //     var path = require('path');
-                        //     return path.dirname(process.execPath);
-                        // },
+                        getCurrentPath = function () {
+                            var path = require('path');
+                            return path.dirname(process.execPath);
+                        },
                         // recentFilePath = function () {
                         //     return getCurrentPath() + "\\recentfile.json";
                         // },
-                        // userSettingPath = function () {
-                        //     return getCurrentPath() + "\\crosslight.usersetting";
-                        // },
+                        userSettingPath = function () {
+                            return getCurrentPath() + "\\crosslight.usersetting";
+                        },
                         // writeBatFile1 = function (app, appName, projectPath, fileName, fileType1, fileType2, batName) {
                         //     var sb = new String(),
                         //             pname = "",
